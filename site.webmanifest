@@ -1,0 +1,20 @@
+{
+  "name": "BHADOTT Studio",
+  "short_name": "BHADOTT",
+  "description": "Games, AI & Creative Technology — estúdio premium do Brasil.",
+  "start_url": "/bhadott-studio/",
+  "scope": "/bhadott-studio/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#020617",
+  "theme_color": "#3b82f6",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/bhadott-studio/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
