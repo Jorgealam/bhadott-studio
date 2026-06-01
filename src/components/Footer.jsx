@@ -3,26 +3,26 @@ import { Github, Instagram, Youtube, Mail, Heart } from "lucide-react"
 import { contactLinks } from "../data/team"
 
 const footerLinks = {
-  "Projects": [
+  "Projetos": [
     { label: "BHADOTT Agro",    href: "#projetos" },
     { label: "BHADOTT Video",   href: "#projetos" },
     { label: "BHADOTT Games",   href: "#projetos" },
     { label: "BHADOTT Tools",   href: "#projetos" },
     { label: "BHADOTT Academy", href: "#projetos" },
   ],
-  "Services": [
+  "Serviços": [
     { label: "Websites & Landing Pages", href: "#servicos" },
-    { label: "SaaS Systems",             href: "#servicos" },
-    { label: "Mobile Apps",              href: "#servicos" },
-    { label: "AI Automation",            href: "#servicos" },
+    { label: "Sistemas SaaS",            href: "#servicos" },
+    { label: "Apps Mobile",              href: "#servicos" },
+    { label: "Automação com IA",         href: "#servicos" },
     { label: "Games & 3D",               href: "#servicos" },
   ],
-  "Support": [
-    { label: "Support Center", href: "#suporte" },
-    { label: "FAQ",            href: "#suporte" },
-    { label: "WhatsApp",       href: "#suporte" },
-    { label: "Send E-mail",    href: "#suporte" },
-    { label: "Instagram",      href: "#suporte" },
+  "Suporte": [
+    { label: "Central de Suporte", href: "#suporte" },
+    { label: "FAQ",                href: "#suporte" },
+    { label: "WhatsApp",           href: "#suporte" },
+    { label: "Enviar E-mail",      href: "#suporte" },
+    { label: "Instagram",          href: "#suporte" },
   ],
 }
 
@@ -107,10 +107,10 @@ export default function Footer() {
               </div>
 
               <p className="text-slate-500 text-sm leading-relaxed mb-2 max-w-xs">
-                Games, AI &amp; Creative Technology — building premium digital experiences from Brazil to the world.
+                Games, IA &amp; Tecnologia Criativa — construindo experiências digitais premium do Brasil para o mundo.
               </p>
               <p className="text-slate-700 text-xs mb-6 font-mono tracking-wider uppercase">
-                Games · AI · Creative Technology
+                Games · IA · Tecnologia Criativa
               </p>
 
               {/* Social links */}
@@ -203,10 +203,10 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="pt-5 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <p className="text-slate-600 text-xs sm:text-sm">
-              © 2026 BHADOTT Studio. All rights reserved.
+              © 2026 BHADOTT Studio. Todos os direitos reservados.
             </p>
             <p className="text-slate-700 text-xs flex items-center gap-1.5">
-              Made with <Heart size={11} className="text-red-500/60" aria-hidden="true" /> by Jorge Alam &amp; Matheus
+              Feito com <Heart size={11} className="text-red-500/60" aria-hidden="true" /> por Jorge Alam &amp; Matheus
             </p>
           </div>
         </div>

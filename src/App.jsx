@@ -1,77 +1,54 @@
 // ============================================================
-// BHADOTT Studio — App Root com React Router
-// HashRouter garante compatibilidade com GitHub Pages
-// Para servidor próprio, trocar por BrowserRouter
+// BHADOTT Studio — App Root
+// src/App.jsx — HashRouter para GitHub Pages
 // ============================================================
 
 import { HashRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
+
+import Home          from "./pages/Home"
+import Sobre         from "./pages/Sobre"
+import Projetos      from "./pages/Projetos"
+import ProjectDetail from "./pages/ProjectDetail"
+import Suporte       from "./pages/Suporte"
+import Contato       from "./pages/Contato"
+import Blog          from "./pages/Blog"
 import PlaceholderPage from "./pages/PlaceholderPage"
 
 export default function App() {
   return (
     <HashRouter>
       <Routes>
-        {/* ── Página principal ── */}
+        {/* ── Home ── */}
         <Route path="/" element={<Home />} />
 
-        {/* ── Rotas futuras — estrutura pronta para implementação ── */}
-        <Route
-          path="/projetos"
-          element={
-            <PlaceholderPage
-              title="Projetos BHADOTT"
-              description="Catálogo completo de projetos em desenvolvimento: BHADOTT Agro, Video, Games, Tools e Academy."
-            />
-          }
-        />
-        <Route
-          path="/projetos/:slug"
-          element={
-            <PlaceholderPage
-              title="Detalhes do Projeto"
-              description="Página individual do projeto com descrição completa, status e informações técnicas."
-            />
-          }
-        />
-        <Route
-          path="/suporte"
-          element={
-            <PlaceholderPage
-              title="Central de Suporte"
-              description="Sistema de suporte com tickets, chat e acompanhamento de projetos. Disponível em breve."
-            />
-          }
-        />
-        <Route
-          path="/contato"
-          element={
-            <PlaceholderPage
-              title="Fale Conosco"
-              description="Formulário de contato e informações para parcerias, projetos e oportunidades."
-            />
-          }
-        />
-        <Route
-          path="/blog"
-          element={
-            <PlaceholderPage
-              title="Blog BHADOTT"
-              description="Artigos, tutoriais e novidades sobre tecnologia, desenvolvimento e inovação digital."
-            />
-          }
-        />
+        {/* ── Sobre ── */}
+        <Route path="/sobre" element={<Sobre />} />
+
+        {/* ── Projetos ── */}
+        <Route path="/projetos"       element={<Projetos />} />
+        <Route path="/projetos/:slug" element={<ProjectDetail />} />
+
+        {/* ── Suporte ── */}
+        <Route path="/suporte" element={<Suporte />} />
+
+        {/* ── Contato ── */}
+        <Route path="/contato" element={<Contato />} />
+
+        {/* ── Blog ── */}
+        <Route path="/blog" element={<Blog />} />
+
+        {/* ── Admin — placeholder até back-end ── */}
         <Route
           path="/admin"
           element={
             <PlaceholderPage
               title="Área Administrativa"
-              description="Painel administrativo privado. Disponível após implementação do back-end."
+              description="Painel administrativo privado. Disponível após implementação do back-end e autenticação."
             />
           }
         />
 
-        {/* ── 404 — rota não encontrada ── */}
+        {/* ── 404 ── */}
         <Route
           path="*"
           element={

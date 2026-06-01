@@ -1,26 +1,28 @@
 // ============================================================
-// BHADOTT Studio — Home Page (Landing Page completa)
+// BHADOTT Studio — Home Page
+// src/pages/Home.jsx
 // ============================================================
 
-import LoadingScreen from "../components/LoadingScreen"
-import Header from "../components/Header"
-import Hero from "../components/Hero"
-import About from "../components/About"
-import Projects from "../components/Projects"
-import Services from "../components/Services"
-import Process from "../components/Process"
-import Team from "../components/Team"
-import FutureSections from "../components/FutureSections"
-import Support from "../components/Support"
-import CTA from "../components/CTA"
-import Footer from "../components/Footer"
+import LoadingScreen    from "../components/LoadingScreen"
+import Header           from "../components/Header"
+import Hero             from "../components/Hero"
+import Stats            from "../components/Stats"
+import About            from "../components/About"
+import Technologies     from "../components/Technologies"
+import Projects         from "../components/Projects"
+import Roadmap          from "../components/Roadmap"
+import ProgressGallery  from "../components/ProgressGallery"
+import Process          from "../components/Process"
+import Team             from "../components/Team"
+import Support          from "../components/Support"
+import CTA              from "../components/CTA"
+import Footer           from "../components/Footer"
 
-// Divisor de seções com glow neon sutil
 function GlowDivider({ color = "blue" }) {
   const colors = {
-    blue:   "rgba(59,130,246,0.18)",
-    violet: "rgba(139,92,246,0.18)",
-    mixed:  "rgba(99,102,241,0.15)",
+    blue:   "rgba(59,130,246,0.15)",
+    violet: "rgba(139,92,246,0.15)",
+    mixed:  "rgba(99,102,241,0.12)",
   }
   return (
     <div className="relative h-px overflow-hidden" aria-hidden="true">
@@ -38,22 +40,49 @@ export default function Home() {
       <LoadingScreen />
       <div className="min-h-screen overflow-x-hidden" style={{ background: "#020617" }}>
         <Header />
+
+        {/* ── Hero ── */}
         <Hero />
         <GlowDivider color="blue" />
-        <About />
+
+        {/* ── Stats — métricas animadas ── */}
+        <Stats />
         <GlowDivider color="mixed" />
-        <Projects />
+
+        {/* ── Sobre o Estúdio ── */}
+        <About />
         <GlowDivider color="violet" />
-        <Services />
+
+        {/* ── Tecnologias ── */}
+        <Technologies />
         <GlowDivider color="blue" />
+
+        {/* ── Projetos em Destaque ── */}
+        <Projects />
+        <GlowDivider color="mixed" />
+
+        {/* ── Roadmap ── */}
+        <Roadmap />
+        <GlowDivider color="violet" />
+
+        {/* ── Galeria de Progresso ── */}
+        <ProgressGallery />
+        <GlowDivider color="blue" />
+
+        {/* ── Processo ── */}
         <Process />
         <GlowDivider color="mixed" />
+
+        {/* ── Equipe ── */}
         <Team />
         <GlowDivider color="violet" />
-        <FutureSections />
-        <GlowDivider color="blue" />
+
+        {/* ── Suporte / Contato ── */}
         <Support />
+
+        {/* ── CTA Final ── */}
         <CTA />
+
         <Footer />
       </div>
     </>

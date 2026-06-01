@@ -118,6 +118,36 @@ section[id] {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes aurora {
+  0%   { transform: translate(0%,   0%)   scale(1);    opacity: 0.5; }
+  33%  { transform: translate(4%,  -6%)   scale(1.08); opacity: 0.7; }
+  66%  { transform: translate(-3%,  4%)   scale(0.95); opacity: 0.4; }
+  100% { transform: translate(0%,   0%)   scale(1);    opacity: 0.5; }
+}
+
+@keyframes aurora2 {
+  0%   { transform: translate(0%,   0%)   scale(1);    opacity: 0.4; }
+  33%  { transform: translate(-5%,  3%)   scale(1.05); opacity: 0.6; }
+  66%  { transform: translate(3%,  -5%)   scale(0.92); opacity: 0.3; }
+  100% { transform: translate(0%,   0%)   scale(1);    opacity: 0.4; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.85); opacity: 0.8; }
+  70%  { transform: scale(1.35); opacity: 0;   }
+  100% { transform: scale(0.85); opacity: 0;   }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ============================================================
    UTILITÁRIOS CUSTOM
    ============================================================ */
@@ -174,8 +204,59 @@ section[id] {
     animation: neon-pulse 3s ease-in-out infinite;
   }
 
+  /* Aurora orbs */
+  .animate-aurora {
+    animation: aurora 12s ease-in-out infinite;
+  }
+  .animate-aurora2 {
+    animation: aurora2 15s ease-in-out infinite;
+  }
+
+  /* Pulse ring — dot pulsante */
+  .animate-pulse-ring {
+    animation: pulse-ring 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+
+  /* Shimmer loading bar */
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Ticker marquee */
+  .animate-ticker {
+    animation: ticker 28s linear infinite;
+  }
+
   /* Section badge padrão */
   .section-badge {
     @apply inline-block px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-widest mb-4;
+  }
+
+  /* Glassmorphism premium */
+  .glass-premium {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* Neon border glow */
+  .neon-border-blue {
+    box-shadow: 0 0 0 1px rgba(59,130,246,0.3), 0 0 20px rgba(59,130,246,0.1);
+  }
+  .neon-border-violet {
+    box-shadow: 0 0 0 1px rgba(139,92,246,0.3), 0 0 20px rgba(139,92,246,0.1);
+  }
+
+  /* Gradient text animado */
+  .text-gradient-animate {
+    background: linear-gradient(135deg, #93c5fd, #a78bfa, #60a5fa, #c4b5fd);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 5s ease infinite;
   }
 }
