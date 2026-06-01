@@ -206,7 +206,7 @@ export default function Footer() {
               © 2026 BHADOTT Studio. Todos os direitos reservados.
             </p>
             <p className="text-slate-700 text-xs flex items-center gap-1.5">
-              Feito com <Heart size={11} className="text-red-500/60" aria-hidden="true" /> por Jorge Alam &amp; Matheus
+              Feito com <Heart size={11} className="text-red-500/60" aria-hidden="true" /> por Jorge Alam
             </p>
           </div>
         </div>

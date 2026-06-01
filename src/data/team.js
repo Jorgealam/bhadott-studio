@@ -1,88 +1,57 @@
 // ============================================================
 // BHADOTT Studio — TEAM & CONTACT DATA
-// Edit this file to update team and contact information
+// Edite este arquivo para atualizar equipe e contato
 // ============================================================
 
 export const teamMain = [
   {
     id: 1,
     name: "Jorge Alam",
-    role: "Founder & Digital Projects Creator",
+    role: "Founder & Creative Developer",
     description:
-      "Responsible for the vision of all projects, idea generation, systems architecture and creative direction of BHADOTT Studio.",
-    avatar: null,        // Add photo URL when available
+      "Responsável pela criação, direção visual, organização dos projetos e desenvolvimento contínuo da BHADOTT Studio.",
+    avatar: null,
     initials: "JA",
     gradientFrom: "#3b82f6",
-    gradientTo: "#7c3aed",
-    accentColor: "rgba(59,130,246,0.3)",
+    gradientTo:   "#7c3aed",
+    accentColor:  "rgba(59,130,246,0.3)",
     social: {
-      linkedin: "#",   // Update with real link
-      github: "#",
-      instagram: "#",
-      youtube: "#",
-    },
-  },
-  {
-    id: 2,
-    name: "Matheus",
-    role: "Full-Stack Developer & Technical Partner",
-    description:
-      "Responsible for systems development, technical architecture and back-end infrastructure across all BHADOTT Studio projects.",
-    avatar: null,
-    initials: "MT",
-    gradientFrom: "#8b5cf6",
-    gradientTo: "#06b6d4",
-    accentColor: "rgba(139,92,246,0.3)",
-    social: {
-      linkedin: "#",
-      github: "#",
-      instagram: "#",
-      youtube: null,
+      linkedin:  null,
+      github:    "https://github.com/jorgealam",
+      instagram: "https://instagram.com/bhadottstudios",
+      youtube:   "https://youtube.com/@bhadottstudios",
     },
   },
 ]
 
+// Vagas futuras abertas
 export const teamPlaceholders = [
   {
     id: 101,
-    role: "Full-Stack Developer",
-    description: "Open position for a full-stack developer.",
+    role: "Desenvolvedor Full-Stack",
+    description: "Vaga futura para desenvolvedor full-stack.",
     icon: "Code2",
     gradient: "from-blue-500/15 to-cyan-500/15",
   },
   {
-    id: 102,
-    role: "UI/UX Designer",
-    description: "Open position for a UI/UX designer.",
-    icon: "Paintbrush",
-    gradient: "from-violet-500/15 to-pink-500/15",
-  },
-  {
     id: 103,
-    role: "Support Analyst",
-    description: "Open position for a support analyst.",
-    icon: "Headphones",
-    gradient: "from-green-500/15 to-teal-500/15",
-  },
-  {
-    id: 104,
-    role: "3D / Games Artist",
-    description: "Open position for a 3D artist and games developer.",
+    role: "Game Artist / 3D",
+    description: "Vaga futura para artista de games e 3D.",
     icon: "Box",
     gradient: "from-yellow-500/15 to-orange-500/15",
   },
 ]
 
 // ============================================================
-// CONTACT LINKS — Update with real links
+// CONTATOS — Atualize com links reais quando disponíveis
 // ============================================================
 export const contactLinks = {
-  whatsapp: "https://wa.me/5500000000000",
-  email: "mailto:contact@bhadott.studio",
+  whatsapp:  "https://wa.me/5500000000000",
+  email:     "mailto:contact@bhadott.studio",
   instagram: "https://instagram.com/bhadottstudios",
-  youtube: "https://youtube.com/@bhadottstudios",
-  github: "https://github.com/bhadottstudios",
-  support: "#",
+  youtube:   "https://youtube.com/@bhadottstudios",
+  github:    "https://github.com/jorgealam",
+  support:   "#",
 }
 
 // ============================================================
@@ -91,32 +60,32 @@ export const contactLinks = {
 export const faq = [
   {
     id: 1,
-    question: "Is BHADOTT currently accepting clients?",
+    question: "A BHADOTT Studio aceita clientes agora?",
     answer:
-      "The studio is in its structuring phase, but we are already available to analyze ideas, projects and partnerships.",
+      "O estúdio está em fase de estruturação, mas já está disponível para analisar ideias, projetos e parcerias pontuais.",
   },
   {
     id: 2,
-    question: "Does the site have a login area?",
+    question: "O site tem área de login?",
     answer:
-      "Not yet. The login area will be built in a future phase with back-end infrastructure and an admin panel.",
+      "Ainda não. A área de login será construída em uma fase futura com infraestrutura back-end e painel administrativo.",
   },
   {
     id: 3,
-    question: "Which projects are currently active?",
+    question: "Quais projetos estão ativos agora?",
     answer:
-      "The main active projects are BHADOTT Agro, BHADOTT Video, BHADOTT Games and BHADOTT Tools.",
+      "Os projetos ativos são EasyAgro Solutions, BHADOTT Control Center e Neon Survivor — todos em desenvolvimento contínuo.",
   },
   {
     id: 4,
-    question: "Can the site be hosted for free?",
+    question: "O site pode ser hospedado de graça?",
     answer:
-      "Yes. The front-end can be deployed on Cloudflare Pages, Netlify, Vercel or GitHub Pages at no cost.",
+      "Sim. O front-end pode ser publicado no GitHub Pages, Vercel ou Netlify sem custo.",
   },
   {
     id: 5,
-    question: "What is BHADOTT's specialty?",
+    question: "Qual é a especialidade da BHADOTT?",
     answer:
-      "We specialize in systems SaaS, mobile apps, AI automation, game prototypes and 3D digital experiences — all with a Brazilian innovation mindset.",
+      "Sistemas SaaS, apps mobile, automação com IA, games e experiências 3D — construídos no Brasil com visão global.",
   },
 ]

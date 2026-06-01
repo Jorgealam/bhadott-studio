@@ -68,19 +68,19 @@ export default function Support() {
           className="text-center mb-12 sm:mb-16"
         >
           <span className="section-badge text-blue-400 bg-blue-500/8 border border-blue-500/20">
-            Support
+            Suporte
           </span>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            Support &{" "}
+            Suporte &{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-              Contact
+              Contato
             </span>
           </h2>
           <p className="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg px-2">
-            Reach out to BHADOTT Studio to ask questions, discuss projects, request support or explore new ideas.
+            Fale com a BHADOTT Studio para tirar dúvidas, discutir projetos, solicitar suporte ou explorar novas ideias.
           </p>
         </motion.div>
 
@@ -92,7 +92,7 @@ export default function Support() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1, duration: 0.55 }}
           >
-            <h3 className="text-white font-bold text-lg sm:text-xl mb-5">Contact Channels</h3>
+            <h3 className="text-white font-bold text-lg sm:text-xl mb-5">Canais de Contato</h3>
             <div className="grid grid-cols-2 gap-3 mb-5">
               {contactButtons.map((btn) => {
                 const Icon = btn.icon
@@ -129,9 +129,9 @@ export default function Support() {
                   <Headphones size={14} className="text-blue-400" aria-hidden="true" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold text-sm mb-1">Support Hours</h4>
+                  <h4 className="text-white font-semibold text-sm mb-1">Horário de Atendimento</h4>
                   <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                    Monday to Friday, 9am–6pm (GMT-3 / Brasília). Email responses within 24 business hours.
+                    Segunda a sexta, 9h–18h (GMT-3 / Brasília). Respostas por e-mail em até 24 horas úteis.
                   </p>
                 </div>
               </div>
