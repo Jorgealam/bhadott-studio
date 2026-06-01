@@ -55,7 +55,7 @@ export default function Blog() {
   const navigate  = useNavigate()
 
   return (
-    <PageLayout backLabel="Back to Home" backTo="/">
+    <PageLayout backLabel="Voltar para a Home" backTo="/">
       <PageHero
         badge="Blog"
         title="BHADOTT"

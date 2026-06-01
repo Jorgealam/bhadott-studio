@@ -1,5 +1,5 @@
 // ============================================================
-// BHADOTT Studio — TEAM & CONTACT DATA
+// BHADOTT Studio - TEAM & CONTACT DATA
 // Edite este arquivo para atualizar equipe e contato
 // ============================================================
 
@@ -7,51 +7,51 @@ export const teamMain = [
   {
     id: 1,
     name: "Jorge Alam",
-    role: "Founder & Creative Developer",
+    role: "Fundador e Criador de Projetos Digitais",
     description:
-      "Responsável pela criação, direção visual, organização dos projetos e desenvolvimento contínuo da BHADOTT Studio.",
+      "Responsável pela visão criativa, direção dos projetos, organização das ideias, testes, conteúdo e evolução do ecossistema BHADOTT.",
     avatar: null,
     initials: "JA",
     gradientFrom: "#3b82f6",
-    gradientTo:   "#7c3aed",
-    accentColor:  "rgba(59,130,246,0.3)",
+    gradientTo: "#7c3aed",
+    accentColor: "rgba(59,130,246,0.3)",
     social: {
-      linkedin:  null,
-      github:    "https://github.com/jorgealam",
+      linkedin: null,
+      github: "https://github.com/jorgealam",
       instagram: "https://instagram.com/bhadottstudios",
-      youtube:   "https://youtube.com/@bhadottstudios",
+      youtube: "https://youtube.com/@bhadottstudios",
     },
   },
 ]
 
-// Vagas futuras abertas
+// Colaborações futuras
 export const teamPlaceholders = [
   {
     id: 101,
-    role: "Desenvolvedor Full-Stack",
-    description: "Vaga futura para desenvolvedor full-stack.",
+    role: "Parceiros técnicos",
+    description: "Colaborações técnicas futuras para sistemas, automações e infraestrutura.",
     icon: "Code2",
     gradient: "from-blue-500/15 to-cyan-500/15",
   },
   {
     id: 103,
-    role: "Game Artist / 3D",
-    description: "Vaga futura para artista de games e 3D.",
+    role: "Criativos e desenvolvimento",
+    description: "Espaço para designers, editores e desenvolvedores conforme os projetos evoluírem.",
     icon: "Box",
     gradient: "from-yellow-500/15 to-orange-500/15",
   },
 ]
 
 // ============================================================
-// CONTATOS — Atualize com links reais quando disponíveis
+// CONTATOS - Atualize com links reais quando disponiveis
 // ============================================================
 export const contactLinks = {
-  whatsapp:  "https://wa.me/5500000000000",
-  email:     "mailto:contact@bhadott.studio",
+  whatsapp: "https://wa.me/5500000000000",
+  email: "mailto:contact@bhadott.studio",
   instagram: "https://instagram.com/bhadottstudios",
-  youtube:   "https://youtube.com/@bhadottstudios",
-  github:    "https://github.com/jorgealam",
-  support:   "#",
+  youtube: "https://youtube.com/@bhadottstudios",
+  github: "https://github.com/jorgealam",
+  support: "#",
 }
 
 // ============================================================
@@ -74,7 +74,7 @@ export const faq = [
     id: 3,
     question: "Quais projetos estão ativos agora?",
     answer:
-      "Os projetos ativos são EasyAgro Solutions, BHADOTT Control Center e Neon Survivor — todos em desenvolvimento contínuo.",
+      "Os projetos ativos são EasyAgro Solutions, BHADOTT Control Center e Neon Survivor, todos em desenvolvimento contínuo.",
   },
   {
     id: 4,
@@ -86,6 +86,6 @@ export const faq = [
     id: 5,
     question: "Qual é a especialidade da BHADOTT?",
     answer:
-      "Sistemas SaaS, apps mobile, automação com IA, games e experiências 3D — construídos no Brasil com visão global.",
+      "A BHADOTT Studio é um ecossistema de criação digital focado em sistemas, automações, IA local, jogos, conteúdo, design e ferramentas para desenvolvimento.",
   },
 ]

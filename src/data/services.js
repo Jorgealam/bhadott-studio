@@ -66,8 +66,8 @@ export const services = [
   },
   {
     id: 11,
-    title: "Support & Maintenance",
-    description: "Ongoing maintenance, updates, bug fixes and continuous support for systems and websites.",
+    title: "Suporte e Manutenção",
+    description: "Manutenção contínua, atualizações, correções e suporte recorrente para sistemas e websites.",
     icon: "Headphones",
   },
   {
