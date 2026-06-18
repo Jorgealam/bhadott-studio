@@ -1,0 +1,12 @@
+name = "bhadott-agro-api"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding     = "DB"
+database_name = "bhadott-agro-db"
+database_id   = "49fd9eb2-ab97-4d5d-927c-5810cb333833"
+
+# Após deploy, adicione o secret:
+#   npx wrangler secret put ADMIN_KEY  (dentro de workers/agro-api/)
