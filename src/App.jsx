@@ -12,6 +12,8 @@ import ProjectDetail from "./pages/ProjectDetail"
 import Suporte       from "./pages/Suporte"
 import Contato       from "./pages/Contato"
 import Blog          from "./pages/Blog"
+import AgroSolutions from "./pages/AgroSolutions"
+import AgroStudio    from "./pages/AgroStudio"
 import PlaceholderPage from "./pages/PlaceholderPage"
 
 export default function App() {
@@ -27,6 +29,10 @@ export default function App() {
         {/* ── Projetos ── */}
         <Route path="/projetos"       element={<Projetos />} />
         <Route path="/projetos/:slug" element={<ProjectDetail />} />
+
+        {/* ── Agro Solutions (página pública + painel privado) ── */}
+        <Route path="/agro"   element={<AgroSolutions />} />
+        <Route path="/studio" element={<AgroStudio />} />
 
         {/* ── Suporte ── */}
         <Route path="/suporte" element={<Suporte />} />

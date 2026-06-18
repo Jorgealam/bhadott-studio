@@ -13,6 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 const navLinks = [
   { label: "Home",      href: "/",         type: "route"  },
   { label: "Projetos",  href: "/projetos", type: "route"  },
+  { label: "Agro",      href: "/agro",     type: "route"  },
   { label: "Serviços",  href: "#servicos", type: "anchor" },
   { label: "Blog",      href: "/blog",     type: "route"  },
   { label: "Suporte",   href: "/suporte",  type: "route"  },
