@@ -46,7 +46,8 @@ export const portalAreas = [
     description: "Um espaço respeitoso para liturgia, orações, estudos, santos e biblioteca.",
     icon: Heart,
     color: "rose",
-    status: "Planejado",
+    status: "Página disponível",
+    route: "/catolico",
     highlights: ["Liturgia", "Orações", "Estudos", "Biblioteca"],
   },
   {
