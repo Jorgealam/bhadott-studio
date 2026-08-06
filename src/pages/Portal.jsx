@@ -1,5 +1,6 @@
+import { useMemo, useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Compass, Sparkles } from "lucide-react"
+import { ArrowRight, Compass, Search, Sparkles, X } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import PageLayout, { GlowDivider, PageHero } from "../components/PageLayout"
 import { portalAreas, portalPillars } from "../data/portalAreas"
@@ -17,6 +18,17 @@ const colors = {
 
 export default function Portal() {
   const navigate = useNavigate()
+  const [query, setQuery] = useState("")
+  const [filter, setFilter] = useState("Todos")
+
+  const visibleAreas = useMemo(() => {
+    const normalized = query.trim().toLocaleLowerCase("pt-BR")
+    return portalAreas.filter((area) => {
+      const matchesText = !normalized || [area.label, area.description, ...area.highlights].join(" ").toLocaleLowerCase("pt-BR").includes(normalized)
+      const matchesFilter = filter === "Todos" || (filter === "Disponíveis" ? Boolean(area.route) : !area.route)
+      return matchesText && matchesFilter
+    })
+  }, [filter, query])
 
   const openArea = (area) => navigate(area.route || `/portal/${area.id}`)
 
@@ -44,8 +56,38 @@ export default function Portal() {
       <section className="relative py-16 sm:py-24">
         <div className="absolute inset-0 bg-[#020617]" aria-hidden="true" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 p-4 rounded-2xl border border-white/7 bg-white/[0.02]">
+            <label className="relative flex-1 max-w-xl">
+              <span className="sr-only">Buscar uma área no portal</span>
+              <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600" aria-hidden="true" />
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Buscar jogos, IA, cursos, ferramentas..."
+                className="w-full rounded-xl border border-white/8 bg-[#020617] py-3 pl-11 pr-11 text-sm text-white placeholder:text-slate-700 outline-none focus:border-blue-400/25"
+              />
+              {query && (
+                <button onClick={() => setQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-slate-600 hover:text-white focus-ring" aria-label="Limpar busca">
+                  <X size={14} aria-hidden="true" />
+                </button>
+              )}
+            </label>
+            <div className="flex gap-2" role="group" aria-label="Filtrar áreas por disponibilidade">
+              {["Todos", "Disponíveis", "Em preparação"].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => setFilter(item)}
+                  className={`px-3 py-2.5 rounded-lg border text-xs font-bold transition-colors focus-ring ${filter === item ? "text-blue-300 bg-blue-500/10 border-blue-400/20" : "text-slate-600 border-white/7 hover:text-slate-300"}`}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <p className="sr-only" aria-live="polite">{visibleAreas.length} áreas encontradas</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {portalAreas.map((area, index) => {
+            {visibleAreas.map((area, index) => {
               const Icon = area.icon
               return (
                 <motion.button
@@ -85,6 +127,15 @@ export default function Portal() {
               )
             })}
           </div>
+
+          {visibleAreas.length === 0 && (
+            <div className="py-20 text-center rounded-3xl border border-dashed border-white/8">
+              <Search size={24} className="text-slate-700 mx-auto mb-4" aria-hidden="true" />
+              <h2 className="text-white font-bold">Nenhuma área encontrada</h2>
+              <p className="text-sm text-slate-600 mt-2">Tente outro termo ou remova o filtro atual.</p>
+              <button onClick={() => { setQuery(""); setFilter("Todos") }} className="mt-5 text-sm font-bold text-blue-400 hover:text-blue-300 focus-ring rounded">Limpar filtros</button>
+            </div>
+          )}
         </div>
       </section>
 
