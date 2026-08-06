@@ -26,7 +26,8 @@ html {
   background: #fbf8f2;
 }
 
-.catholic-theme [class*="text-white"],
+.catholic-theme [class*="text-white"]:not(button):not(a),
+.catholic-theme [class*="text-[#fffaf0]"],
 .catholic-theme [class*="text-slate-200"],
 .catholic-theme [class*="text-slate-300"] {
   color: #302534 !important;
