@@ -20,6 +20,9 @@ import {
   Newspaper,
   ShoppingBag,
   Tag,
+  FileText,
+  Upload,
+  CheckCircle2,
 } from "lucide-react"
 import PageLayout, { GlowDivider, PageHero } from "../components/PageLayout"
 import {
@@ -36,6 +39,7 @@ import {
   stationsOfTheCross,
   portalBooks,
   prayerLanguages,
+  catechismStudyModules,
 } from "../data/catholicContent"
 import { catholicCuriosities, curiosityThemes, futureStoreItems } from "../data/catholicCuriosities"
 
@@ -50,6 +54,7 @@ const tabs = [
   { id: "leitor", label: "Leitor", icon: BookOpen },
   { id: "curiosidades", label: "Curiosidades", icon: Newspaper },
   { id: "loja", label: "Loja", icon: ShoppingBag },
+  { id: "catecismo", label: "Catecismo", icon: FileText },
 ]
 
 function SectionHeading({ eyebrow, title, description }) {
@@ -71,7 +76,7 @@ function StartView({ setActiveTab }) {
           <button key={id} onClick={() => setActiveTab(id)} className="group p-6 text-left rounded-3xl border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.045] to-transparent hover:border-amber-200/20 transition-all focus-ring">
             <Icon size={22} className="text-amber-300 mb-5" aria-hidden="true" />
             <h3 className="text-lg font-bold text-[#fffaf0]" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>{label}</h3>
-            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : id === "leitor" ? "Livros completos para ler sem sair do portal." : id === "curiosidades" ? "Bíblia, história, símbolos e doutrina com referências." : id === "loja" ? "Catálogo preparado para futuros livros e materiais." : "Clássicos espirituais e acervos de domínio público."}</p>
+            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : id === "leitor" ? "Livros completos para ler sem sair do portal." : id === "curiosidades" ? "Bíblia, história, símbolos e doutrina com referências." : id === "loja" ? "Catálogo gratuito preparado para futuros materiais." : id === "catecismo" ? "Leitor pessoal de PDF e trilha gratuita pelos quatro pilares." : "Clássicos espirituais e acervos de domínio público."}</p>
           </button>
         ))}
       </div>
@@ -332,10 +337,47 @@ function CuriositiesView() {
 function StoreView() {
   return (
     <>
-      <SectionHeading eyebrow="Catálogo em preparação" title="Livros e materiais católicos" description="A estrutura da loja já está preparada para o futuro. Por segurança e transparência, ainda não há pagamentos, pedidos ou produtos anunciados como disponíveis." />
-      <div className="p-5 sm:p-6 rounded-3xl border border-blue-300/10 bg-blue-500/[0.035] mb-8 flex gap-4"><ShieldCheck className="text-blue-300 flex-shrink-0" /><div><h3 className="font-bold text-white">Compra desativada nesta fase</h3><p className="text-sm text-slate-400 leading-relaxed mt-2">Antes de vender, será necessário cadastrar empresa ou responsável, política de troca, privacidade, meios de pagamento seguros, emissão fiscal quando aplicável e direitos de comercialização de cada obra.</p></div></div>
+      <SectionHeading eyebrow="Acervo gratuito em preparação" title="Livros e materiais católicos" description="Este espaço será uma loja gratuita: materiais próprios e obras que possam ser distribuídas legalmente, sempre sem cobrança." />
+      <div className="p-5 sm:p-6 rounded-3xl border border-blue-300/10 bg-blue-500/[0.035] mb-8 flex gap-4"><ShieldCheck className="text-blue-300 flex-shrink-0" /><div><h3 className="font-bold text-white">Tudo gratuito</h3><p className="text-sm text-slate-400 leading-relaxed mt-2">Não haverá pagamento ou pedido comercial. Cada arquivo só será disponibilizado depois da conferência de autoria e permissão de distribuição, porque gratuidade e autorização são cuidados diferentes.</p></div></div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">{futureStoreItems.map((item) => <article key={item.id} className="p-6 rounded-3xl border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.04] to-transparent flex flex-col"><div className="w-11 h-11 rounded-xl grid place-items-center bg-amber-500/10 text-amber-300"><BookOpen size={20} /></div><span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-600 mt-5"><Tag size={11} /> {item.type}</span><h3 className="text-lg text-[#fffaf0] font-bold mt-2" style={{ fontFamily: "Georgia, serif" }}>{item.title}</h3><p className="text-sm text-slate-500 leading-relaxed mt-3 flex-1">{item.description}</p><span className="mt-6 inline-flex justify-center rounded-xl border border-white/7 px-4 py-3 text-xs font-bold text-slate-600">Em preparação</span></article>)}</div>
-      <div className="mt-8 rounded-2xl border border-emerald-300/10 bg-emerald-500/[0.03] p-5"><p className="text-sm text-slate-400"><strong className="text-emerald-200">Princípio do catálogo:</strong> somente obras próprias, de domínio público em edição permitida ou livros obtidos por fornecedor autorizado serão oferecidos.</p></div>
+      <div className="mt-8 rounded-2xl border border-emerald-300/10 bg-emerald-500/[0.03] p-5"><p className="text-sm text-slate-400"><strong className="text-emerald-200">Princípio do acervo:</strong> somente obras próprias, de domínio público em edição permitida ou materiais com autorização expressa serão distribuídos gratuitamente.</p></div>
+    </>
+  )
+}
+
+function CatechismView() {
+  const [pdfUrl, setPdfUrl] = useState("")
+  const [pdfName, setPdfName] = useState("")
+  const [completed, setCompleted] = useState(() => {
+    try { return JSON.parse(window.localStorage.getItem("bhadott-catechism-progress") || "[]") } catch { return [] }
+  })
+  useEffect(() => () => { if (pdfUrl) URL.revokeObjectURL(pdfUrl) }, [pdfUrl])
+  useEffect(() => window.localStorage.setItem("bhadott-catechism-progress", JSON.stringify(completed)), [completed])
+  const handlePdf = (event) => {
+    const file = event.target.files?.[0]
+    if (!file || file.type !== "application/pdf") return
+    if (pdfUrl) URL.revokeObjectURL(pdfUrl)
+    setPdfUrl(URL.createObjectURL(file))
+    setPdfName(file.name)
+  }
+  const toggleModule = (id) => setCompleted((items) => items.includes(id) ? items.filter((item) => item !== id) : [...items, id])
+  const percent = Math.round((completed.length / catechismStudyModules.length) * 100)
+  return (
+    <>
+      <SectionHeading eyebrow="Estudo gratuito" title="Catecismo da Igreja Católica" description="Abra no próprio portal um PDF que você já possui e acompanhe uma trilha autoral de dez módulos. O arquivo nunca é enviado: permanece somente no navegador deste aparelho." />
+      <div className="grid xl:grid-cols-[1.25fr_0.75fr] gap-5 items-start">
+        <div className="rounded-3xl border border-white/7 bg-white/[0.02] overflow-hidden">
+          <div className="p-5 border-b border-white/6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"><div><h3 className="font-bold text-white">Leitor pessoal de PDF</h3><p className="text-xs text-slate-500 mt-1">{pdfName || "Nenhum arquivo selecionado"}</p></div><label className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-300/20 text-sm font-bold text-amber-200 cursor-pointer focus-within:ring-2 focus-within:ring-amber-300/30"><Upload size={15} /> Escolher meu PDF<input type="file" accept="application/pdf,.pdf" onChange={handlePdf} className="sr-only" /></label></div>
+          {pdfUrl ? <iframe src={pdfUrl} title={`Leitor de ${pdfName}`} className="w-full h-[70vh] min-h-[560px] bg-white" /> : <div className="min-h-[480px] grid place-items-center p-8 text-center"><div><FileText size={45} className="text-slate-700 mx-auto" /><h3 className="text-lg text-slate-300 font-bold mt-5">Seu Catecismo abre aqui</h3><p className="text-sm text-slate-500 mt-2 max-w-md">Escolha o PDF no computador ou celular. Nada será copiado para o site, para o GitHub ou para um servidor.</p></div></div>}
+        </div>
+        <aside className="rounded-3xl border border-blue-300/10 bg-blue-500/[0.025] p-5 xl:sticky xl:top-40">
+          <div className="flex items-center justify-between gap-3"><div><span className="text-[10px] uppercase tracking-wider text-blue-300">Trilha de estudo</span><h3 className="text-xl text-white font-bold mt-1" style={{ fontFamily: "Georgia, serif" }}>Quatro pilares em 10 módulos</h3></div><strong className="text-blue-200">{percent}%</strong></div>
+          <div className="h-1.5 bg-white/5 rounded-full mt-4 overflow-hidden"><div className="h-full bg-blue-400 transition-all" style={{ width: `${percent}%` }} /></div>
+          <div className="space-y-2 mt-5 max-h-[620px] overflow-y-auto pr-1">{catechismStudyModules.map((module, index) => { const done = completed.includes(module.id); return <article key={module.id} className={`rounded-2xl border p-4 ${done ? "border-emerald-300/15 bg-emerald-500/[0.035]" : "border-white/7 bg-[#020617]/45"}`}><button onClick={() => toggleModule(module.id)} className="w-full text-left focus-ring rounded"><div className="flex gap-3"><CheckCircle2 size={18} className={done ? "text-emerald-300" : "text-slate-700"} /><div><span className="text-[9px] uppercase tracking-wider text-slate-600">{index + 1} · {module.part}</span><h4 className="text-sm font-bold text-slate-200 mt-1">{module.title}</h4><p className="text-[11px] text-blue-300 mt-1">{module.paragraphs}</p><p className="text-xs text-slate-500 leading-relaxed mt-2">{module.goal}</p></div></div></button></article> })}</div>
+          <a href="https://www.vatican.va/archive/cathechism_po/index_new/prima-pagina-cic_po.html" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-xs text-blue-300 focus-ring rounded">Consultar versão oficial online <ExternalLink size={12} /></a>
+        </aside>
+      </div>
+      <div className="mt-6 p-5 rounded-2xl border border-amber-200/10 bg-amber-100/[0.025]"><p className="text-sm text-slate-400 leading-relaxed"><strong className="text-amber-200">Sugestão:</strong> leia de 5 a 10 parágrafos por dia, consulte as referências bíblicas, anote uma ideia central e termine perguntando como aquele ensinamento pode ser vivido.</p></div>
     </>
   )
 }
@@ -369,6 +411,7 @@ export default function Catolico() {
           {activeTab === "leitor" && <ReaderView />}
           {activeTab === "curiosidades" && <CuriositiesView />}
           {activeTab === "loja" && <StoreView />}
+          {activeTab === "catecismo" && <CatechismView />}
         </div>
       </section>
     </PageLayout>

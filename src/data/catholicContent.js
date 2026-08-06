@@ -277,6 +277,19 @@ export const prayerLanguages = [
   },
 ]
 
+export const catechismStudyModules = [
+  { id: "prologo", part: "Começar", title: "Como estudar o Catecismo", paragraphs: "CIC 1-25", goal: "Conhecer a finalidade, os destinatários, os quatro pilares e o princípio pastoral da caridade." },
+  { id: "revelacao", part: "Parte I", title: "O ser humano, a Revelação e a fé", paragraphs: "CIC 26-184", goal: "Compreender o desejo de Deus, sua Revelação, a transmissão da fé e a resposta humana." },
+  { id: "credo-pai", part: "Parte I", title: "Creio em Deus Pai", paragraphs: "CIC 185-421", goal: "Estudar o Credo, a Trindade, a criação, a providência, o pecado e a promessa da salvação." },
+  { id: "cristo", part: "Parte I", title: "Jesus Cristo e o Espírito Santo", paragraphs: "CIC 422-747", goal: "Percorrer a Encarnação, a vida de Jesus, o mistério pascal e a missão do Espírito Santo." },
+  { id: "igreja", part: "Parte I", title: "A Igreja e a vida eterna", paragraphs: "CIC 748-1065", goal: "Conhecer a Igreja, a comunhão dos santos, Maria, o perdão, a ressurreição e a vida eterna." },
+  { id: "liturgia", part: "Parte II", title: "Liturgia e sacramentos", paragraphs: "CIC 1066-1690", goal: "Entender a economia sacramental e estudar os sete sacramentos da Igreja." },
+  { id: "vocacao", part: "Parte III", title: "A vocação e a vida moral", paragraphs: "CIC 1691-2051", goal: "Estudar dignidade, liberdade, consciência, virtudes, pecado, graça, lei e vida comunitária." },
+  { id: "mandamentos", part: "Parte III", title: "Os Dez Mandamentos", paragraphs: "CIC 2052-2557", goal: "Aprofundar o amor a Deus e ao próximo nas escolhas concretas da vida cristã." },
+  { id: "oracao", part: "Parte IV", title: "A oração cristã", paragraphs: "CIC 2558-2758", goal: "Conhecer a tradição da oração, suas fontes, caminhos, dificuldades e formas de expressão." },
+  { id: "pai-nosso", part: "Parte IV", title: "O Pai-Nosso", paragraphs: "CIC 2759-2865", goal: "Meditar a oração do Senhor, suas sete petições e o Amém final." },
+]
+
 export const liturgicalSeasons = [
   { name: "Advento", color: "Violeta", meaning: "Espera, esperança e preparação para o Natal." },
   { name: "Natal", color: "Branco", meaning: "Celebração da Encarnação e manifestação de Cristo." },

@@ -121,5 +121,5 @@ export const futureStoreItems = [
   { id: "ebook-oracao", title: "Dez passos para uma vida de oração", type: "E-book", description: "Edição ampliada do livro introdutório disponível gratuitamente no portal." },
   { id: "diario-lectio", title: "Diário de Lectio Divina", type: "Digital", description: "Páginas guiadas para leitura, meditação, oração, contemplação e ação." },
   { id: "guia-rosario", title: "Guia ilustrado do Rosário", type: "E-book", description: "Mistérios, referências bíblicas e espaço para intenções pessoais." },
-  { id: "classicos", title: "Edições e livros selecionados", type: "Futuro catálogo", description: "Espaço reservado para obras próprias ou revendidas com autorização e procedência." },
+  { id: "classicos", title: "Edições e livros selecionados", type: "Futuro acervo", description: "Espaço reservado para obras próprias ou materiais autorizados para distribuição gratuita." },
 ]
