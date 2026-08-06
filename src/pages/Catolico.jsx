@@ -265,18 +265,25 @@ function FormationView() {
 }
 
 function ReaderView() {
-  const book = portalBooks[0]
+  const [bookId, setBookId] = useState(portalBooks[0].id)
+  const book = portalBooks.find((item) => item.id === bookId) || portalBooks[0]
   const storageKey = `bhadott-reader-${book.id}`
   const [page, setPage] = useState(() => {
     const saved = Number(window.localStorage.getItem(storageKey))
     return Number.isInteger(saved) && saved >= 0 && saved < book.pages.length ? saved : 0
   })
   useEffect(() => window.localStorage.setItem(storageKey, String(page)), [page, storageKey])
+  useEffect(() => {
+    const saved = Number(window.localStorage.getItem(storageKey))
+    setPage(Number.isInteger(saved) && saved >= 0 && saved < book.pages.length ? saved : 0)
+  }, [book.id, book.pages.length, storageKey])
   const current = book.pages[page]
   const progress = ((page + 1) / book.pages.length) * 100
   return (
     <>
       <SectionHeading eyebrow="Livro no portal" title={book.title} description={`${book.description} Seu progresso fica salvo somente neste aparelho.`} />
+      <div className="grid sm:grid-cols-2 gap-3 mb-6">{portalBooks.map((item) => <button key={item.id} onClick={() => setBookId(item.id)} className={`text-left rounded-2xl border p-4 focus-ring ${book.id === item.id ? "border-amber-300/25 bg-amber-500/10" : "border-white/7 bg-white/[0.02]"}`}><span className="text-[10px] uppercase tracking-wider text-amber-300">{item.pages.length} capítulos</span><h3 className="font-bold text-white mt-1">{item.title}</h3><p className="text-xs text-slate-500 mt-2">{item.description}</p></button>)}</div>
+      {book.notice && <div className="mb-5 rounded-2xl border border-blue-300/10 bg-blue-500/[0.035] p-4 text-sm text-slate-400"><strong className="text-blue-200">Nota editorial:</strong> {book.notice}</div>}
       <div className="grid lg:grid-cols-[260px_1fr] gap-5 items-start">
         <aside className="rounded-3xl border border-white/7 bg-white/[0.02] p-4 lg:sticky lg:top-40">
           <p className="px-2 text-[10px] uppercase tracking-widest text-slate-600 mb-3">Sumário · {book.author}</p>
@@ -288,7 +295,8 @@ function ReaderView() {
             <span className="text-[10px] uppercase tracking-[0.2em] text-amber-300">Página {page + 1} de {book.pages.length}</span>
             <h2 className="text-3xl sm:text-4xl text-[#fffaf0] font-bold mt-4" style={{ fontFamily: "Georgia, serif" }}>{current.title}</h2>
             <div className="mt-8 space-y-5">{current.paragraphs.map((paragraph) => <p key={paragraph} className="text-base sm:text-lg text-slate-300 leading-8" style={{ fontFamily: "Georgia, serif" }}>{paragraph}</p>)}</div>
-            <div className="mt-9 p-5 rounded-2xl border border-blue-300/10 bg-blue-500/[0.035]"><strong className="text-xs uppercase tracking-wider text-blue-300">Para praticar</strong><p className="text-sm text-slate-400 mt-2 leading-relaxed">{current.practice}</p></div>
+            {current.references && <div className="mt-9 p-5 rounded-2xl border border-amber-300/10 bg-amber-500/[0.025]"><strong className="text-xs uppercase tracking-wider text-amber-300">Fontes para conferir</strong><p className="text-sm text-slate-400 mt-2 leading-relaxed">{current.references}</p></div>}
+            <div className={`${current.references ? "mt-4" : "mt-9"} p-5 rounded-2xl border border-blue-300/10 bg-blue-500/[0.035]`}><strong className="text-xs uppercase tracking-wider text-blue-300">Para praticar</strong><p className="text-sm text-slate-400 mt-2 leading-relaxed">{current.practice}</p></div>
             <div className="flex items-center justify-between gap-3 mt-auto pt-10"><button disabled={page === 0} onClick={() => setPage((value) => value - 1)} className="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-white/8 text-sm text-slate-300 disabled:opacity-30 focus-ring"><ChevronLeft size={16} /> Anterior</button><button disabled={page === book.pages.length - 1} onClick={() => setPage((value) => value + 1)} className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-300/20 text-sm text-amber-200 disabled:opacity-30 focus-ring">Próxima <ChevronRight size={16} /></button></div>
           </div>
         </article>
