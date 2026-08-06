@@ -1,5 +1,5 @@
 import { ArrowRight, CheckCircle2, Compass } from "lucide-react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 import PageLayout, { GlowDivider, PageHero } from "../components/PageLayout"
 import { getPortalArea } from "../data/portalAreas"
 import { getPortalContent } from "../data/portalContent"
@@ -11,8 +11,7 @@ export default function PortalArea() {
   const content = getPortalContent(areaId)
 
   if (!area || !content) {
-    navigate("/portal", { replace: true })
-    return null
+    return <Navigate to="/portal" replace />
   }
 
   const Icon = area.icon
