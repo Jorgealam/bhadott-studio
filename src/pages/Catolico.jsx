@@ -17,6 +17,9 @@ import {
   Cross,
   ScrollText,
   ShieldCheck,
+  Newspaper,
+  ShoppingBag,
+  Tag,
 } from "lucide-react"
 import PageLayout, { GlowDivider, PageHero } from "../components/PageLayout"
 import {
@@ -34,6 +37,7 @@ import {
   portalBooks,
   prayerLanguages,
 } from "../data/catholicContent"
+import { catholicCuriosities, curiosityThemes, futureStoreItems } from "../data/catholicCuriosities"
 
 const tabs = [
   { id: "inicio", label: "Início", icon: Church },
@@ -44,6 +48,8 @@ const tabs = [
   { id: "biblioteca", label: "Biblioteca", icon: Library },
   { id: "formacao", label: "Formação", icon: ScrollText },
   { id: "leitor", label: "Leitor", icon: BookOpen },
+  { id: "curiosidades", label: "Curiosidades", icon: Newspaper },
+  { id: "loja", label: "Loja", icon: ShoppingBag },
 ]
 
 function SectionHeading({ eyebrow, title, description }) {
@@ -65,7 +71,7 @@ function StartView({ setActiveTab }) {
           <button key={id} onClick={() => setActiveTab(id)} className="group p-6 text-left rounded-3xl border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.045] to-transparent hover:border-amber-200/20 transition-all focus-ring">
             <Icon size={22} className="text-amber-300 mb-5" aria-hidden="true" />
             <h3 className="text-lg font-bold text-[#fffaf0]" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>{label}</h3>
-            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : id === "leitor" ? "Livros completos para ler sem sair do portal." : "Clássicos espirituais e acervos de domínio público."}</p>
+            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : id === "leitor" ? "Livros completos para ler sem sair do portal." : id === "curiosidades" ? "Bíblia, história, símbolos e doutrina com referências." : id === "loja" ? "Catálogo preparado para futuros livros e materiais." : "Clássicos espirituais e acervos de domínio público."}</p>
           </button>
         ))}
       </div>
@@ -286,6 +292,54 @@ function ReaderView() {
   )
 }
 
+function CuriositiesView() {
+  const [theme, setTheme] = useState("todos")
+  const [query, setQuery] = useState("")
+  const [selectedId, setSelectedId] = useState(null)
+  const selected = catholicCuriosities.find((item) => item.id === selectedId)
+  const items = useMemo(() => {
+    const term = query.trim().toLocaleLowerCase("pt-BR")
+    return catholicCuriosities.filter((item) => (theme === "todos" || item.theme === theme) && (!term || [item.title, item.summary, item.references].join(" ").toLocaleLowerCase("pt-BR").includes(term)))
+  }, [query, theme])
+
+  if (selected) return (
+    <article className="max-w-4xl mx-auto">
+      <button onClick={() => setSelectedId(null)} className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white focus-ring rounded mb-8"><ChevronLeft size={16} /> Voltar às curiosidades</button>
+      <div className="rounded-[2rem] border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.04] to-transparent p-6 sm:p-10">
+        <span className="text-[10px] uppercase tracking-[0.18em] text-amber-300">{curiosityThemes.find((item) => item.id === selected.theme)?.label}</span>
+        <h2 className="text-3xl sm:text-4xl text-[#fffaf0] font-bold mt-4" style={{ fontFamily: "Georgia, serif" }}>{selected.title}</h2>
+        <p className="text-lg text-slate-400 leading-relaxed mt-5">{selected.summary}</p>
+        <div className="mt-8 space-y-5">{selected.paragraphs.map((paragraph) => <p key={paragraph} className="text-base sm:text-lg text-slate-300 leading-8" style={{ fontFamily: "Georgia, serif" }}>{paragraph}</p>)}</div>
+        <div className="mt-9 p-4 rounded-xl border border-blue-300/10 bg-blue-500/[0.035]"><strong className="text-[10px] uppercase tracking-wider text-blue-300">Referências para aprofundar</strong><p className="text-sm text-slate-400 mt-2">{selected.references}</p></div>
+        <p className="text-xs text-slate-600 leading-relaxed mt-6">Texto introdutório autoral. Consulte as passagens e documentos indicados; o conteúdo não substitui formação pastoral ou estudo acadêmico.</p>
+      </div>
+    </article>
+  )
+
+  return (
+    <>
+      <SectionHeading eyebrow="Conhecer para aprofundar" title="Curiosidades Católicas" description="Conteúdo do antigo projeto adaptado e reescrito para o BHADOTT. Cada texto evita sensacionalismo e apresenta referências para que você continue estudando." />
+      <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between mb-8">
+        <div className="flex gap-2 overflow-x-auto pb-1">{curiosityThemes.map((item) => <button key={item.id} onClick={() => setTheme(item.id)} className={`flex-shrink-0 px-4 py-2.5 rounded-xl border text-xs font-bold focus-ring ${theme === item.id ? "border-amber-300/25 bg-amber-500/10 text-amber-200" : "border-white/7 text-slate-500"}`}>{item.label}</button>)}</div>
+        <label className="relative block w-full lg:max-w-sm"><span className="sr-only">Buscar curiosidade</span><Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar assunto..." className="w-full rounded-xl border border-white/8 bg-[#020617] py-3 pl-10 pr-4 text-sm text-white outline-none focus:border-amber-300/25" /></label>
+      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">{items.map((item) => <article key={item.id} className="p-6 rounded-3xl border border-white/7 bg-white/[0.025] flex flex-col"><span className="text-[10px] uppercase tracking-wider text-amber-300">{curiosityThemes.find((entry) => entry.id === item.theme)?.label}</span><h3 className="text-xl text-white font-bold mt-3" style={{ fontFamily: "Georgia, serif" }}>{item.title}</h3><p className="text-sm text-slate-500 leading-relaxed mt-3 flex-1">{item.summary}</p><p className="text-[11px] text-blue-300/60 mt-5">{item.references}</p><button onClick={() => setSelectedId(item.id)} className="text-left text-xs font-bold text-amber-200 mt-4 focus-ring rounded">Ler explicação →</button></article>)}</div>
+      {!items.length && <div className="p-10 text-center rounded-2xl border border-white/7 text-sm text-slate-500">Nenhum conteúdo encontrado para esta busca.</div>}
+    </>
+  )
+}
+
+function StoreView() {
+  return (
+    <>
+      <SectionHeading eyebrow="Catálogo em preparação" title="Livros e materiais católicos" description="A estrutura da loja já está preparada para o futuro. Por segurança e transparência, ainda não há pagamentos, pedidos ou produtos anunciados como disponíveis." />
+      <div className="p-5 sm:p-6 rounded-3xl border border-blue-300/10 bg-blue-500/[0.035] mb-8 flex gap-4"><ShieldCheck className="text-blue-300 flex-shrink-0" /><div><h3 className="font-bold text-white">Compra desativada nesta fase</h3><p className="text-sm text-slate-400 leading-relaxed mt-2">Antes de vender, será necessário cadastrar empresa ou responsável, política de troca, privacidade, meios de pagamento seguros, emissão fiscal quando aplicável e direitos de comercialização de cada obra.</p></div></div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">{futureStoreItems.map((item) => <article key={item.id} className="p-6 rounded-3xl border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.04] to-transparent flex flex-col"><div className="w-11 h-11 rounded-xl grid place-items-center bg-amber-500/10 text-amber-300"><BookOpen size={20} /></div><span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-600 mt-5"><Tag size={11} /> {item.type}</span><h3 className="text-lg text-[#fffaf0] font-bold mt-2" style={{ fontFamily: "Georgia, serif" }}>{item.title}</h3><p className="text-sm text-slate-500 leading-relaxed mt-3 flex-1">{item.description}</p><span className="mt-6 inline-flex justify-center rounded-xl border border-white/7 px-4 py-3 text-xs font-bold text-slate-600">Em preparação</span></article>)}</div>
+      <div className="mt-8 rounded-2xl border border-emerald-300/10 bg-emerald-500/[0.03] p-5"><p className="text-sm text-slate-400"><strong className="text-emerald-200">Princípio do catálogo:</strong> somente obras próprias, de domínio público em edição permitida ou livros obtidos por fornecedor autorizado serão oferecidos.</p></div>
+    </>
+  )
+}
+
 export default function Catolico() {
   const [activeTab, setActiveTab] = useState("inicio")
   return (
@@ -313,6 +367,8 @@ export default function Catolico() {
           {activeTab === "biblioteca" && <LibraryView />}
           {activeTab === "formacao" && <FormationView />}
           {activeTab === "leitor" && <ReaderView />}
+          {activeTab === "curiosidades" && <CuriositiesView />}
+          {activeTab === "loja" && <StoreView />}
         </div>
       </section>
     </PageLayout>
