@@ -3,25 +3,30 @@
 // src/App.jsx — HashRouter para GitHub Pages
 // ============================================================
 
+import { lazy, Suspense } from "react"
 import { HashRouter, Routes, Route } from "react-router-dom"
+import RouteLoading from "./components/RouteLoading"
+import RouteMeta from "./components/RouteMeta"
 
-import Home          from "./pages/Home"
-import Sobre         from "./pages/Sobre"
-import Projetos      from "./pages/Projetos"
-import ProjectDetail from "./pages/ProjectDetail"
-import Suporte       from "./pages/Suporte"
-import Contato       from "./pages/Contato"
-import Blog          from "./pages/Blog"
-import AgroSolutions from "./pages/AgroSolutions"
-import AgroStudio    from "./pages/AgroStudio"
-import Portal        from "./pages/Portal"
-import PortalArea    from "./pages/PortalArea"
-import PlaceholderPage from "./pages/PlaceholderPage"
+const Home = lazy(() => import("./pages/Home"))
+const Sobre = lazy(() => import("./pages/Sobre"))
+const Projetos = lazy(() => import("./pages/Projetos"))
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"))
+const Suporte = lazy(() => import("./pages/Suporte"))
+const Contato = lazy(() => import("./pages/Contato"))
+const Blog = lazy(() => import("./pages/Blog"))
+const AgroSolutions = lazy(() => import("./pages/AgroSolutions"))
+const AgroStudio = lazy(() => import("./pages/AgroStudio"))
+const Portal = lazy(() => import("./pages/Portal"))
+const PortalArea = lazy(() => import("./pages/PortalArea"))
+const PlaceholderPage = lazy(() => import("./pages/PlaceholderPage"))
 
 export default function App() {
   return (
     <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <Routes>
+      <RouteMeta />
+      <Suspense fallback={<RouteLoading />}>
+        <Routes>
         {/* ── Home ── */}
         <Route path="/" element={<Home />} />
 
@@ -70,7 +75,8 @@ export default function App() {
             />
           }
         />
-      </Routes>
+        </Routes>
+      </Suspense>
     </HashRouter>
   )
 }
