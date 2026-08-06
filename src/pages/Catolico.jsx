@@ -282,7 +282,7 @@ function ReaderView() {
   return (
     <>
       <SectionHeading eyebrow="Livro no portal" title={book.title} description={`${book.description} Seu progresso fica salvo somente neste aparelho.`} />
-      <div className="grid sm:grid-cols-2 gap-3 mb-6">{portalBooks.map((item) => <button key={item.id} onClick={() => setBookId(item.id)} className={`text-left rounded-2xl border p-4 focus-ring ${book.id === item.id ? "border-amber-300/25 bg-amber-500/10" : "border-white/7 bg-white/[0.02]"}`}><span className="text-[10px] uppercase tracking-wider text-amber-300">{item.pages.length} capítulos</span><h3 className="font-bold text-white mt-1">{item.title}</h3><p className="text-xs text-slate-500 mt-2">{item.description}</p></button>)}</div>
+      <div className="grid sm:grid-cols-2 gap-3 mb-6">{portalBooks.map((item) => <button key={item.id} onClick={() => setBookId(item.id)} className={`text-left rounded-2xl border p-4 focus-ring ${book.id === item.id ? "border-amber-300/25 bg-amber-500/10" : "border-white/7 bg-white/[0.02]"}`}><span className="text-[10px] uppercase tracking-wider text-amber-300">{item.pages.length} capítulos{item.readingTime ? ` · ${item.readingTime}` : ""}</span><h3 className="font-bold text-white mt-1">{item.title}</h3><p className="text-xs text-slate-500 mt-2">{item.description}</p></button>)}</div>
       {book.notice && <div className="mb-5 rounded-2xl border border-blue-300/10 bg-blue-500/[0.035] p-4 text-sm text-slate-400"><strong className="text-blue-200">Nota editorial:</strong> {book.notice}</div>}
       <div className="grid lg:grid-cols-[260px_1fr] gap-5 items-start">
         <aside className="rounded-3xl border border-white/7 bg-white/[0.02] p-4 lg:sticky lg:top-40">

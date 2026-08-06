@@ -269,6 +269,7 @@ export const portalBooks = [
     title: "Francisco de Assis: irmão de todos",
     author: "BHADOTT Studio",
     description: "Biografia espiritual autoral em doze capítulos, para conhecer a história e o caminho evangélico de São Francisco.",
+    readingTime: "50–60 minutos com as pausas de reflexão",
     notice: "Texto autoral baseado em acontecimentos históricos e fontes franciscanas antigas. Não reproduz traduções modernas nem substitui uma biografia acadêmica.",
     pages: [
       { title: "1. Assis e o filho do mercador", paragraphs: ["Francisco nasceu em Assis, na Úmbria, por volta de 1181 ou 1182. Era filho de Pietro di Bernardone, comerciante de tecidos, e de Madonna Pica. Cresceu num ambiente urbano em transformação, no qual comércio, prestígio familiar, conflitos políticos e ideais de cavalaria disputavam a imaginação dos jovens.", "Na juventude, gostava de festas, canções e sonhos de grandeza. Era generoso, mas ainda procurava reconhecimento segundo os valores de seu tempo. A santidade não começou nele como perfeição pronta; nasceu num caminho lento, cheio de perguntas, quedas e mudanças."], references: "Fontes antigas: Tomás de Celano, Vida Primeira, 1–3 · São Boaventura, Legenda Maior, I", practice: "Recorde uma ambição de sua vida e pergunte que bem verdadeiro você procura por meio dela." },
