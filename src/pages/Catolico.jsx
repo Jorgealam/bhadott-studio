@@ -26,6 +26,9 @@ import {
   Share2,
   Copy,
   LoaderCircle,
+  Bell,
+  Download,
+  X,
 } from "lucide-react"
 import PageLayout, { GlowDivider, PageHero } from "../components/PageLayout"
 import {
@@ -74,6 +77,29 @@ function SectionHeading({ eyebrow, title, description }) {
 const readingLabels = { prima: "Primeira leitura", salmo: "Salmo responsorial", seconda: "Segunda leitura", vangelo: "Evangelho" }
 const liturgicalColors = { bianco: "Branco", rosso: "Vermelho", verde: "Verde", viola: "Roxo", rosa: "Rosa" }
 const knownCelebrations = { trasfigurazione: "Transfiguração do Senhor" }
+
+function CatholicAppInvite() {
+  const [installPrompt, setInstallPrompt] = useState(() => window.__bhadottInstallPrompt || null)
+  const [hidden, setHidden] = useState(() => window.localStorage.getItem("bhadott-pwa-invite-hidden") === "yes")
+  const [notificationState, setNotificationState] = useState(() => typeof Notification === "undefined" ? "unsupported" : Notification.permission)
+  useEffect(() => {
+    const ready = () => setInstallPrompt(window.__bhadottInstallPrompt || null)
+    window.addEventListener("bhadott-install-ready", ready)
+    return () => window.removeEventListener("bhadott-install-ready", ready)
+  }, [])
+  useEffect(() => {
+    if (notificationState !== "granted" || !("serviceWorker" in navigator)) return
+    const today = new Date().toISOString().slice(0, 10)
+    if (window.localStorage.getItem("bhadott-gospel-notified") === today) return
+    navigator.serviceWorker.ready.then((registration) => registration.showNotification("Evangelho do Dia", { body: "A Palavra de hoje já está disponível. Toque para ler e meditar.", icon: `${import.meta.env.BASE_URL}favicon.svg`, badge: `${import.meta.env.BASE_URL}favicon.svg`, tag: `evangelho-${today}` }))
+    window.localStorage.setItem("bhadott-gospel-notified", today)
+  }, [notificationState])
+  if (hidden || (window.matchMedia("(display-mode: standalone)").matches && notificationState === "granted")) return null
+  const install = async () => { if (!installPrompt) return; await installPrompt.prompt(); await installPrompt.userChoice; window.__bhadottInstallPrompt = null; setInstallPrompt(null) }
+  const enableNotifications = async () => { if (typeof Notification === "undefined") return; const permission = await Notification.requestPermission(); setNotificationState(permission) }
+  const dismiss = () => { window.localStorage.setItem("bhadott-pwa-invite-hidden", "yes"); setHidden(true) }
+  return <div className="border-b border-[#ded3e4] bg-[#f3eaf8]"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col lg:flex-row lg:items-center gap-4"><div className="flex-1"><span className="text-[10px] uppercase tracking-wider font-bold text-[#5b159d]">Aplicativo BHADOTT</span><h3 className="font-bold text-[#2c2030] mt-1">Leve a Área Católica com você</h3><p className="text-xs text-[#756b78] mt-1">Instale para acesso rápido e permita o lembrete quando abrir o aplicativo em um novo dia.</p></div><div className="flex flex-wrap gap-2">{installPrompt && <button onClick={install} className="inline-flex items-center gap-2 rounded-xl bg-[#5b159d] text-white px-4 py-3 text-xs font-bold"><Download size={14} /> Instalar aplicativo</button>}{notificationState !== "granted" && notificationState !== "unsupported" && <button onClick={enableNotifications} className="inline-flex items-center gap-2 rounded-xl bg-[#8a6924] text-white px-4 py-3 text-xs font-bold"><Bell size={14} /> Ativar lembrete</button>}<button onClick={dismiss} className="inline-flex items-center gap-2 rounded-xl border border-[#d8cae0] bg-white px-4 py-3 text-xs font-bold text-[#756b78]"><X size={14} /> Agora não</button></div></div></div>
+}
 
 function DailyLiturgyView() {
   const query = new URLSearchParams(window.location.hash.split("?")[1] || "")
@@ -464,6 +490,7 @@ export default function Catolico() {
           ))}
         </nav>
       </div>
+      <CatholicAppInvite />
       <section className="py-14 sm:py-20 bg-[#fbf8f2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {activeTab === "inicio" && <StartView setActiveTab={setActiveTab} />}

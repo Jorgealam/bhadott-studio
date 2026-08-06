@@ -1,14 +1,29 @@
 {
   "name": "BHADOTT Studio",
   "short_name": "BHADOTT",
-  "description": "Ecossistema brasileiro de criação digital com foco em sistemas, automações, IA local, jogos, conteúdo e design.",
-  "start_url": "/bhadott-studio/",
+  "description": "Portal brasileiro gratuito com formação, leituras, projetos e uma área católica para oração e estudo.",
+  "start_url": "/bhadott-studio/#/catolico",
   "scope": "/bhadott-studio/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#020617",
-  "theme_color": "#3b82f6",
+  "background_color": "#fbf8f2",
+  "theme_color": "#5b159d",
   "lang": "pt-BR",
+  "categories": ["education", "lifestyle", "books"],
+  "shortcuts": [
+    {
+      "name": "Evangelho do Dia",
+      "short_name": "Evangelho",
+      "url": "/bhadott-studio/#/catolico?secao=evangelho",
+      "icons": [{ "src": "/bhadott-studio/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Biblioteca Católica",
+      "short_name": "Biblioteca",
+      "url": "/bhadott-studio/#/catolico?secao=biblioteca",
+      "icons": [{ "src": "/bhadott-studio/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ],
   "icons": [
     {
       "src": "/bhadott-studio/favicon.svg",
