@@ -23,6 +23,9 @@ import {
   FileText,
   Upload,
   CheckCircle2,
+  Share2,
+  Copy,
+  LoaderCircle,
 } from "lucide-react"
 import PageLayout, { GlowDivider, PageHero } from "../components/PageLayout"
 import {
@@ -45,6 +48,7 @@ import { catholicCuriosities, curiosityThemes, futureStoreItems } from "../data/
 
 const tabs = [
   { id: "inicio", label: "Início", icon: Church },
+  { id: "evangelho", label: "Evangelho do Dia", icon: SunMedium },
   { id: "oracoes", label: "Orações", icon: Heart },
   { id: "rosario", label: "Rosário", icon: Sparkles },
   { id: "santos", label: "Santos", icon: Users },
@@ -67,6 +71,58 @@ function SectionHeading({ eyebrow, title, description }) {
   )
 }
 
+const readingLabels = { prima: "Primeira leitura", salmo: "Salmo responsorial", seconda: "Segunda leitura", vangelo: "Evangelho" }
+const liturgicalColors = { bianco: "Branco", rosso: "Vermelho", verde: "Verde", viola: "Roxo", rosa: "Rosa" }
+const knownCelebrations = { trasfigurazione: "Transfiguração do Senhor" }
+
+function DailyLiturgyView() {
+  const query = new URLSearchParams(window.location.hash.split("?")[1] || "")
+  const requested = query.get("data")
+  const [date, setDate] = useState(() => requested && /^\d{4}-\d{2}-\d{2}$/.test(requested) ? new Date(`${requested}T12:00:00`) : new Date())
+  const [liturgy, setLiturgy] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [notice, setNotice] = useState("")
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, "0")
+  const day = String(date.getDate()).padStart(2, "0")
+  const isoDate = `${year}-${month}-${day}`
+  const formattedDate = new Intl.DateTimeFormat("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }).format(date)
+
+  useEffect(() => {
+    let active = true
+    setLoading(true)
+    setNotice("")
+    fetch(`https://parolaviva.art/api/v1/letture/${year}/${month}-${day}.json`)
+      .then((response) => { if (!response.ok) throw new Error(); return response.json() })
+      .then((data) => { if (active) setLiturgy(data) })
+      .catch(() => { if (active) setLiturgy(null) })
+      .finally(() => { if (active) setLoading(false) })
+    return () => { active = false }
+  }, [year, month, day])
+
+  const moveDate = (amount) => setDate((current) => { const next = new Date(current); next.setDate(next.getDate() + amount); return next })
+  const readings = Object.entries(liturgy?.letture || {})
+  const celebration = knownCelebrations[liturgy?.id_celebrazione] || liturgy?.celebrazione || "Liturgia do dia"
+  const gospel = liturgy?.letture?.vangelo?.riferimento || ""
+  const shareUrl = `${window.location.origin}${window.location.pathname}#/catolico?secao=evangelho&data=${isoDate}`
+  const shareText = `Evangelho do Dia · ${formattedDate}\n${celebration}${gospel ? `\nEvangelho: ${gospel}` : ""}\nLeia e medite gratuitamente no BHADOTT Studio:`
+  const copyReading = async () => { await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`); setNotice("Conteúdo copiado!") }
+  const shareReading = async () => {
+    if (navigator.share) return navigator.share({ title: "Evangelho do Dia", text: shareText, url: shareUrl })
+    window.open(`https://wa.me/?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`, "_blank", "noopener,noreferrer")
+  }
+
+  return <div className="rounded-[2rem] bg-[#fbf8f2] text-[#271e2b] p-5 sm:p-9 lg:p-12">
+    <div className="text-center"><span className="text-[11px] uppercase tracking-[0.2em] font-bold text-[#8a6924]">Palavra para o caminho</span><h2 className="text-4xl sm:text-5xl font-bold mt-3" style={{ fontFamily: "Georgia, serif" }}>Evangelho do Dia</h2><p className="text-[#766b79] capitalize mt-3">{formattedDate}</p></div>
+    <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-3xl mx-auto mt-8"><button onClick={() => moveDate(-1)} className="rounded-2xl border border-[#e2d8e8] bg-white px-2 py-4 text-xs sm:text-sm font-bold"><ChevronLeft size={15} className="inline" /> Anterior</button><button onClick={() => setDate(new Date())} className="rounded-2xl bg-[#8a6924] text-white px-2 py-4 text-sm font-bold">Hoje</button><button onClick={() => moveDate(1)} className="rounded-2xl border border-[#e2d8e8] bg-white px-2 py-4 text-xs sm:text-sm font-bold">Próximo <ChevronRight size={15} className="inline" /></button></div>
+    {loading && <div className="h-72 grid place-items-center"><LoaderCircle className="animate-spin text-[#8a6924]" size={36} /></div>}
+    {!loading && !liturgy && <div className="max-w-xl mx-auto mt-10 rounded-3xl border border-[#e2d8e8] bg-white p-8 text-center"><h3 className="text-xl font-bold">Leitura ainda não disponível</h3><p className="text-sm text-[#766b79] mt-2">Escolha outro dia ou tente novamente mais tarde.</p></div>}
+    {!loading && liturgy && <div className="grid lg:grid-cols-[290px_1fr] gap-5 mt-10 items-start"><aside className="rounded-3xl border border-[#e2d8e8] bg-white p-5 lg:sticky lg:top-40"><span className="text-[10px] uppercase tracking-wider text-[#8a6924]">Celebração</span><h3 className="text-2xl font-bold mt-2" style={{ fontFamily: "Georgia, serif" }}>{celebration}</h3><p className="text-sm text-[#766b79] mt-2">Cor litúrgica: <strong>{liturgicalColors[liturgy.colore] || liturgy.colore}</strong></p><div className="space-y-2 mt-6">{readings.map(([type, reading]) => <a key={type} href={`#reading-${type}`} className="block rounded-xl bg-[#f4edf8] p-3"><strong className="block text-xs text-[#795911]">{readingLabels[type] || type}</strong><span className="text-sm">{reading.riferimento}</span></a>)}</div></aside><main className="space-y-4">{readings.map(([type, reading]) => <article id={`reading-${type}`} key={type} className={`rounded-3xl border p-6 sm:p-8 ${type === "vangelo" ? "border-[#caa64e] bg-[#fffaf0]" : "border-[#e2d8e8] bg-white"}`}><span className="text-xs uppercase tracking-wider font-bold text-[#8a6924]">{readingLabels[type] || type}</span><h3 className="text-3xl sm:text-4xl font-bold mt-3" style={{ fontFamily: "Georgia, serif" }}>{reading.riferimento}</h3>{type === "vangelo" && <div className="mt-6 rounded-2xl bg-[#f1e8f7] p-5"><strong className="text-sm">Para meditar</strong><p className="text-sm text-[#5f5365] leading-relaxed mt-2">O que Jesus me convida a escutar, transformar ou praticar neste dia?</p></div>}</article>)}</main></div>}
+    <div className="max-w-3xl mx-auto mt-8 rounded-3xl border border-[#e2d8e8] bg-white p-6"><h3 className="font-bold">Leia o texto completo em português</h3><p className="text-sm text-[#766b79] mt-2">As referências são atualizadas automaticamente. O texto bíblico integral é aberto na fonte oficial para respeitar os direitos da edição em português.</p><div className="flex flex-wrap gap-3 mt-5"><a href="https://liturgiadiaria.edicoescnbb.com.br/" target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#8a6924] text-white px-4 py-3 text-sm font-bold">Abrir CNBB <ExternalLink size={14} className="inline ml-1" /></a><button onClick={copyReading} className="rounded-xl border border-[#d4c28f] px-4 py-3 text-sm font-bold"><Copy size={14} className="inline mr-1" /> Copiar</button><button onClick={shareReading} className="rounded-xl bg-[#5b159d] text-white px-4 py-3 text-sm font-bold"><Share2 size={14} className="inline mr-1" /> Compartilhar</button></div>{notice && <p className="text-sm text-emerald-700 mt-3">{notice}</p>}</div>
+    <p className="text-center text-xs text-[#8a808c] mt-6">Calendário e referências: Parola Viva, CC BY 4.0 · Leitura integral em português: CNBB.</p>
+  </div>
+}
+
 function StartView({ setActiveTab }) {
   return (
     <>
@@ -76,7 +132,7 @@ function StartView({ setActiveTab }) {
           <button key={id} onClick={() => setActiveTab(id)} className="group p-6 text-left rounded-3xl border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.045] to-transparent hover:border-amber-200/20 transition-all focus-ring">
             <Icon size={22} className="text-amber-300 mb-5" aria-hidden="true" />
             <h3 className="text-lg font-bold text-[#fffaf0]" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>{label}</h3>
-            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : id === "leitor" ? "Livros completos para ler sem sair do portal." : id === "curiosidades" ? "Bíblia, história, símbolos e doutrina com referências." : id === "loja" ? "Catálogo gratuito preparado para futuros materiais." : id === "catecismo" ? "Leitor pessoal de PDF e trilha gratuita pelos quatro pilares." : "Clássicos espirituais e acervos de domínio público."}</p>
+            <p className="text-sm text-slate-500 mt-2">{id === "evangelho" ? "Celebração, referências diárias, meditação e compartilhamento." : id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : id === "leitor" ? "Livros completos para ler sem sair do portal." : id === "curiosidades" ? "Bíblia, história, símbolos e doutrina com referências." : id === "loja" ? "Catálogo gratuito preparado para futuros materiais." : id === "catecismo" ? "Leitor pessoal de PDF e trilha gratuita pelos quatro pilares." : "Clássicos espirituais e acervos de domínio público."}</p>
           </button>
         ))}
       </div>
@@ -391,7 +447,7 @@ function CatechismView() {
 }
 
 export default function Catolico() {
-  const [activeTab, setActiveTab] = useState("inicio")
+  const [activeTab, setActiveTab] = useState(() => new URLSearchParams(window.location.hash.split("?")[1] || "").get("secao") || "inicio")
   return (
     <PageLayout backLabel="Voltar para o Portal" backTo="/portal">
       <PageHero badge="Fé · Leitura · Oração" title="Área" titleGrad="Católica" subtitle="Um espaço sereno para rezar, estudar e descobrir a riqueza da tradição cristã.">
@@ -410,6 +466,7 @@ export default function Catolico() {
       <section className="py-14 sm:py-20 bg-[#020617]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {activeTab === "inicio" && <StartView setActiveTab={setActiveTab} />}
+          {activeTab === "evangelho" && <DailyLiturgyView />}
           {activeTab === "oracoes" && <PrayersView />}
           {activeTab === "rosario" && <RosaryView />}
           {activeTab === "santos" && <SaintsView />}
