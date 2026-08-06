@@ -14,14 +14,20 @@ import Contato       from "./pages/Contato"
 import Blog          from "./pages/Blog"
 import AgroSolutions from "./pages/AgroSolutions"
 import AgroStudio    from "./pages/AgroStudio"
+import Portal        from "./pages/Portal"
+import PortalArea    from "./pages/PortalArea"
 import PlaceholderPage from "./pages/PlaceholderPage"
 
 export default function App() {
   return (
-    <HashRouter>
+    <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         {/* ── Home ── */}
         <Route path="/" element={<Home />} />
+
+        {/* Portal — catálogo central das áreas BHADOTT */}
+        <Route path="/portal" element={<Portal />} />
+        <Route path="/portal/:areaId" element={<PortalArea />} />
 
         {/* ── Sobre ── */}
         <Route path="/sobre" element={<Sobre />} />

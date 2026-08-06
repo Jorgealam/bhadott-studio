@@ -6,12 +6,13 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Compass, Menu, X } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 
 // Mistura de rotas reais e âncoras da home
 const navLinks = [
   { label: "Home",      href: "/",         type: "route"  },
+  { label: "Explorar",  href: "/portal",   type: "route", featured: true },
   { label: "Projetos",  href: "/projetos", type: "route"  },
   { label: "Agro",      href: "/agro",     type: "route"  },
   { label: "Serviços",  href: "#servicos", type: "anchor" },
@@ -170,7 +171,10 @@ export default function Header() {
                     active ? "text-blue-400" : "text-slate-400 hover:text-blue-400"
                   }`}
                 >
-                  {link.label}
+                  <span className="inline-flex items-center gap-1.5">
+                    {link.featured && <Compass size={13} aria-hidden="true" />}
+                    {link.label}
+                  </span>
                   <span
                     className={`absolute bottom-1 left-3 right-3 h-px bg-blue-500 rounded-full transition-transform duration-200 ${
                       active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
