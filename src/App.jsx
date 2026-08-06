@@ -19,6 +19,7 @@ const AgroSolutions = lazy(() => import("./pages/AgroSolutions"))
 const AgroStudio = lazy(() => import("./pages/AgroStudio"))
 const Portal = lazy(() => import("./pages/Portal"))
 const PortalArea = lazy(() => import("./pages/PortalArea"))
+const Ferramentas = lazy(() => import("./pages/Ferramentas"))
 const PlaceholderPage = lazy(() => import("./pages/PlaceholderPage"))
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         {/* Portal — catálogo central das áreas BHADOTT */}
         <Route path="/portal" element={<Portal />} />
         <Route path="/portal/:areaId" element={<PortalArea />} />
+        <Route path="/ferramentas" element={<Ferramentas />} />
 
         {/* ── Sobre ── */}
         <Route path="/sobre" element={<Sobre />} />

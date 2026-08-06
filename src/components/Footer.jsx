@@ -15,7 +15,7 @@ const footerLinks = {
     { label: "Todos os projetos", href: "/projetos" },
     { label: "BHADOTT Agro", href: "/agro" },
     { label: "Blog", href: "/blog" },
-    { label: "Ferramentas", href: "/portal/ferramentas" },
+    { label: "Ferramentas", href: "/ferramentas" },
     { label: "Explorar o portal", href: "/portal" },
   ],
   Suporte: [

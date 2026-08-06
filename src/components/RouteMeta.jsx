@@ -13,6 +13,7 @@ const routeMeta = {
   "/projetos": { title: "Projetos — BHADOTT Studio", description: "Sistemas, jogos e soluções digitais em desenvolvimento no BHADOTT Studio." },
   "/agro": { title: "BHADOTT Agro Solutions", description: "Tecnologia, conteúdo e soluções digitais voltadas ao universo agro." },
   "/blog": { title: "Blog — BHADOTT Studio", description: "Artigos, dev logs, tutoriais e novidades do BHADOTT Studio." },
+  "/ferramentas": { title: "Ferramentas — BHADOTT Studio", description: "Utilidades gratuitas que funcionam diretamente no navegador." },
   "/sobre": { title: "Sobre — BHADOTT Studio", description: "Conheça a visão, os princípios e a trajetória do BHADOTT Studio." },
   "/suporte": { title: "Suporte — BHADOTT Studio", description: "Central de suporte e perguntas frequentes do BHADOTT Studio." },
   "/contato": { title: "Contato — BHADOTT Studio", description: "Entre em contato para projetos, parcerias e oportunidades." },

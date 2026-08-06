@@ -74,7 +74,8 @@ export const portalAreas = [
     description: "Calculadoras, conversores, utilitários, templates e pequenos recursos digitais.",
     icon: Wrench,
     color: "emerald",
-    status: "Planejado",
+    status: "Página disponível",
+    route: "/ferramentas",
     highlights: ["Calculadoras", "Conversores", "Templates", "Scripts"],
   },
   {
