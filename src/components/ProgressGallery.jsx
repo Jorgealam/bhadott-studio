@@ -15,19 +15,19 @@ const categories = ["Todos", "Sistemas", "Jogos", "UI/UX"]
 const galleryItems = [
   {
     id: 1,
-    title: "EasyAgro — Dashboard Principal",
-    project: "EasyAgro Solutions",
+    title: "BHADOTT Agro — Dashboard Principal",
+    project: "BHADOTT Agro Solutions",
     category: "Sistemas",
     status: "preview",
     icon: Monitor,
     color: "green",
-    imageUrl: null, // substitua por: "/screenshots/easyagro-dashboard.png"
+    imageUrl: null, // substitua por: "/screenshots/bhadott-agro-dashboard.png"
     desc: "Painel de controle central da propriedade rural.",
   },
   {
     id: 2,
-    title: "EasyAgro — Módulo Financeiro",
-    project: "EasyAgro Solutions",
+    title: "BHADOTT Agro — Módulo Financeiro",
+    project: "BHADOTT Agro Solutions",
     category: "Sistemas",
     status: "preview",
     icon: Monitor,

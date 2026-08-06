@@ -10,13 +10,13 @@ const GITHUB   = "https://github.com/jorgealam"
 export const featuredProjects = [
   {
     id: "f1",
-    slug: "easyagro-solutions",
-    name: "EasyAgro Solutions",
+    slug: "bhadott-agro-solutions",
+    name: "BHADOTT Agro Solutions",
     tagline: "Gestão agrícola, simplificada.",
     description:
       "Sistema de gestão agrícola para pequenos e médios produtores. Controle de propriedade, produção, estoque, finanças e acesso remoto em uma plataforma acessível.",
     longDescription:
-      "EasyAgro Solutions nasceu da necessidade real de digitalizar o campo brasileiro. O sistema oferece controle completo da propriedade rural — do rebanho ao financeiro — com interface intuitiva e funcionamento offline-first para áreas com conectividade limitada.",
+      "BHADOTT Agro Solutions nasceu da necessidade real de digitalizar o campo brasileiro. O sistema oferece controle completo da propriedade rural — do rebanho ao financeiro — com interface intuitiva e funcionamento offline-first para áreas com conectividade limitada.",
     status: "Em Desenvolvimento",
     statusColor: "blue",
     category: "SaaS / AgroTech",
@@ -168,35 +168,6 @@ export const projectsData = [
     links: { demo: "https://bhadottstudios.github.io", github: GITHUB },
   },
   {
-    id: "p4",
-    slug: "bhadott-agro",
-    name: "BHADOTT Agro",
-    tagline: "Gestão rural redefinida.",
-    description:
-      "Plataforma SaaS de gestão agropecuária com controle de propriedade, produção, estoque, finanças e acesso remoto.",
-    longDescription:
-      "BHADOTT Agro é a evolução natural do EasyAgro — plataforma enterprise para gestão rural com suporte a múltiplas propriedades, relatórios avançados e integração com APIs do agronegócio.",
-    status: "Planejamento",
-    statusColor: "blue",
-    category: "SaaS / AgroTech",
-    accentColor: "#3b82f6",
-    gradient: "from-blue-500/10 to-cyan-600/10",
-    border: "border-blue-500/20",
-    techStack: ["React", "Node.js", "PostgreSQL", "React Native"],
-    features: ["Multi-propriedade", "Relatórios avançados", "API agro integrada", "App mobile nativo"],
-    timeline: [
-      { phase: "EasyAgro v1",        status: "active"  },
-      { phase: "Expansão Enterprise", status: "pending" },
-      { phase: "Lançamento SaaS",     status: "pending" },
-    ],
-    cta: {
-      primary:   { label: "Saber mais", href: WHATSAPP, external: true },
-      secondary: { label: "Planejamento", href: null,   disabled: true  },
-      github:    null,
-    },
-    links: { demo: null, github: null },
-  },
-  {
     id: "p5",
     slug: "bhadott-video",
     name: "BHADOTT Video",
@@ -257,7 +228,8 @@ export const projectsData = [
 ]
 
 export function getProjectBySlug(slug) {
-  return projectsData.find((p) => p.slug === slug) || null
+  const currentSlug = slug === "easyagro-solutions" ? "bhadott-agro-solutions" : slug
+  return projectsData.find((p) => p.slug === currentSlug) || null
 }
 
 export const statusColors = {

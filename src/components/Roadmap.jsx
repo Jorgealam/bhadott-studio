@@ -17,7 +17,7 @@ const phases = [
     color: "blue",
     items: [
       { icon: Building2,  label: "BHADOTT Studio",         desc: "Estruturação do estúdio e identidade da marca.",  status: "done"   },
-      { icon: Layers,     label: "EasyAgro Solutions",     desc: "Sistema de gestão agrícola para produtores.",      status: "active" },
+      { icon: Layers,     label: "BHADOTT Agro Solutions", desc: "Sistema de gestão agrícola para produtores.",      status: "active" },
       { icon: Rocket,     label: "BHADOTT Control Center", desc: "Plataforma de produtividade e IA local.",          status: "active" },
       { icon: Gamepad2,   label: "Neon Survivor",          desc: "Jogo roguelite de sobrevivência em Godot.",        status: "active" },
     ],

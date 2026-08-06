@@ -10,7 +10,7 @@ import { ArrowRight, ExternalLink } from "lucide-react"
 import { featuredProjects, statusColors } from "../data/projectsData"
 
 const iconSvgs = {
-  EasyAgro: () => (
+  BhadottAgro: () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
       <path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v5"/>
       <circle cx="9" cy="18" r="3"/><circle cx="20" cy="18" r="3"/>
@@ -35,7 +35,7 @@ const iconSvgs = {
 }
 
 function getIcon(slug) {
-  if (slug.includes("easyagro")) return iconSvgs.EasyAgro
+  if (slug.includes("bhadott-agro") || slug.includes("easyagro")) return iconSvgs.BhadottAgro
   if (slug.includes("control"))  return iconSvgs.Control
   return iconSvgs.Game
 }

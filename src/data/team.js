@@ -74,7 +74,7 @@ export const faq = [
     id: 3,
     question: "Quais projetos estão ativos agora?",
     answer:
-      "Os projetos ativos são EasyAgro Solutions, BHADOTT Control Center e Neon Survivor, todos em desenvolvimento contínuo.",
+      "Os projetos ativos são BHADOTT Agro Solutions, BHADOTT Control Center e Neon Survivor, todos em desenvolvimento contínuo.",
   },
   {
     id: 4,
