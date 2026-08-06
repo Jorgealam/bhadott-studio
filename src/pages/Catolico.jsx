@@ -232,24 +232,74 @@ function PrayersView() {
   )
 }
 
+const rosaryScripture = {
+  "Mistérios Gozosos": [
+    ["A Anunciação do Anjo a Maria", "Lc 1,26-38", "Acolher com fé a vontade de Deus."],
+    ["A Visitação de Maria a Isabel", "Lc 1,39-56", "Levar Cristo ao encontro do próximo."],
+    ["O nascimento de Jesus em Belém", "Lc 2,1-20", "Contemplar a humildade do Salvador."],
+    ["A apresentação de Jesus no Templo", "Lc 2,22-35", "Oferecer a vida e confiar nas promessas."],
+    ["O encontro de Jesus no Templo", "Lc 2,41-52", "Procurar Jesus com perseverança."],
+  ],
+  "Mistérios Luminosos": [
+    ["O Batismo de Jesus no Jordão", "Mt 3,13-17", "Recordar a graça e a missão do Batismo."],
+    ["Jesus se revela nas bodas de Caná", "Jo 2,1-11", "Confiar em Cristo e fazer o que Ele disser."],
+    ["O anúncio do Reino e o convite à conversão", "Mc 1,14-15", "Converter o coração e acolher o Evangelho."],
+    ["A Transfiguração de Jesus", "Mt 17,1-9", "Escutar o Filho amado do Pai."],
+    ["A instituição da Eucaristia", "Lc 22,14-20", "Agradecer a presença e a entrega de Cristo."],
+  ],
+  "Mistérios Dolorosos": [
+    ["A agonia de Jesus no Horto", "Mt 26,36-46", "Permanecer com Jesus e confiar ao Pai a própria angústia."],
+    ["A flagelação de Jesus", "Jo 19,1", "Pedir cura para as feridas do corpo e da alma."],
+    ["A coroação de espinhos", "Mt 27,27-31", "Reconhecer a realeza humilde de Cristo."],
+    ["Jesus carrega a cruz", "Lc 23,26-32", "Acompanhar os que sofrem e carregar a cruz com esperança."],
+    ["A crucificação e morte de Jesus", "Jo 19,25-30", "Permanecer aos pés da cruz e receber o amor entregue."],
+  ],
+  "Mistérios Gloriosos": [
+    ["A Ressurreição de Jesus", "Mt 28,1-10", "Renovar a esperança na vitória de Cristo."],
+    ["A Ascensão de Jesus", "At 1,6-11", "Viver a missão enquanto esperamos o Senhor."],
+    ["A vinda do Espírito Santo", "At 2,1-13", "Pedir os dons do Espírito para servir."],
+    ["A Assunção de Maria", "Ap 12,1; cf. Lc 1,46-55", "Contemplar a esperança da vida plena em Deus."],
+    ["A coroação de Maria", "Ap 12,1; cf. 2Tm 4,8", "Pedir perseverança e contemplar a vitória da graça."],
+  ],
+}
+
+const angelicChoirs = [
+  ["Serafins", "Que o amor de Deus inflame nosso coração."], ["Querubins", "Que cresçamos no conhecimento e na sabedoria da fé."], ["Tronos", "Que a humildade e a paz ordenem nossa vida."], ["Dominações", "Que aprendamos a servir sem dominar o próximo."], ["Potestades", "Que sejamos fortalecidos contra o mal e a tentação."], ["Virtudes", "Que perseveremos na prática do bem."], ["Principados", "Que famílias, comunidades e povos sejam guiados pela justiça."], ["Arcanjos", "Que acolhamos os anúncios e as missões confiadas por Deus."], ["Anjos", "Que caminhemos sob a proteção de Deus e cuidemos uns dos outros."],
+]
+
+function PrayerText({ title }) {
+  const prayer = traditionalPrayers.find((item) => item.title === title)
+  return prayer ? <div className="rounded-2xl border border-[#e1d6e6] bg-white p-4"><strong className="text-sm text-[#5b159d]">{title}</strong><p className="text-sm text-[#65596a] leading-relaxed mt-2">{prayer.text}</p></div> : null
+}
+
 function RosaryView() {
-  return (
-    <>
-      <SectionHeading eyebrow="Guia do Rosário" title="Contemplar a vida de Cristo com Maria" description="Comece com o Sinal da Cruz, ofereça sua intenção, reze o Credo, um Pai-Nosso, três Ave-Marias e o Glória. Em cada mistério, anuncie o episódio, faça uma breve pausa e reze uma dezena." />
-      <div className="grid md:grid-cols-2 gap-4">
-        {rosaryMysteries.map((mystery) => (
-          <article key={mystery.title} className="rounded-3xl border border-violet-300/10 bg-violet-500/[0.035] p-6">
-            <span className="text-[10px] uppercase tracking-[0.16em] text-violet-300">{mystery.day}</span>
-            <h3 className="text-xl font-bold text-white mt-3" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>{mystery.title}</h3>
-            <ol className="space-y-3 mt-5">
-              {mystery.items.map((item, index) => <li key={item} className="flex gap-3 text-sm text-slate-400"><span className="text-violet-300 font-bold">{index + 1}</span>{item}</li>)}
-            </ol>
-          </article>
-        ))}
-      </div>
-      <div className="mt-6 p-5 rounded-2xl border border-amber-200/10 bg-amber-100/[0.035] text-sm text-slate-400 leading-relaxed">Ao terminar os cinco mistérios, reze a Salve-Rainha e apresente suas intenções. Não tenha pressa: o Rosário é uma oração contemplativa, não uma prova de velocidade.</div>
-    </>
-  )
+  const [devotion, setDevotion] = useState("rosario")
+  const [setTitle, setSetTitle] = useState("Mistérios Gozosos")
+  const [step, setStep] = useState(0)
+  const [bead, setBead] = useState(0)
+  const mystery = rosaryScripture[setTitle]?.[step]
+  const choir = angelicChoirs[step]
+  const maxBeads = devotion === "rosario" ? 10 : 3
+  const nextStep = () => { setStep((value) => Math.min(value + 1, devotion === "rosario" ? 4 : 8)); setBead(0) }
+  const reset = (nextDevotion) => { setDevotion(nextDevotion); setStep(0); setBead(0) }
+  return <>
+    <SectionHeading eyebrow="Oração acompanhada" title="Reze passo a passo" description="Escolha uma devoção, leia a passagem ou intenção, acompanhe cada conta e avance no seu ritmo. O progresso permanece nesta tela enquanto você reza." />
+    <div className="flex flex-wrap gap-3 mb-6"><button onClick={() => reset("rosario")} className={`rounded-xl px-5 py-3 text-sm font-bold border ${devotion === "rosario" ? "bg-[#5b159d] text-white border-[#5b159d]" : "bg-white text-[#5b159d] border-[#d9cce0]"}`}>Santo Rosário</button><button onClick={() => reset("miguel")} className={`rounded-xl px-5 py-3 text-sm font-bold border ${devotion === "miguel" ? "bg-[#5b159d] text-white border-[#5b159d]" : "bg-white text-[#5b159d] border-[#d9cce0]"}`}>Terço de São Miguel</button></div>
+    {devotion === "rosario" && <details className="rounded-3xl border border-[#e1d6e6] bg-[#f7f0fa] p-5 mb-6"><summary className="cursor-pointer font-bold text-[#5b159d]">Orações iniciais · abrir roteiro</summary><p className="text-sm text-[#65596a] mt-4 mb-4">Faça o Sinal da Cruz, apresente sua intenção, reze o Creio, um Pai-Nosso, três Ave-Marias pelas virtudes da fé, esperança e caridade, e o Glória.</p><div className="grid lg:grid-cols-3 gap-3"><PrayerText title="Creio" /><PrayerText title="Pai-Nosso" /><PrayerText title="Ave-Maria" /></div></details>}
+    {devotion === "rosario" && <div className="flex gap-2 overflow-x-auto pb-2 mb-6">{Object.keys(rosaryScripture).map((title) => <button key={title} onClick={() => { setSetTitle(title); setStep(0); setBead(0) }} className={`flex-shrink-0 rounded-xl px-4 py-3 text-xs font-bold border ${setTitle === title ? "bg-[#f1e4f7] text-[#5b159d] border-[#b997c9]" : "bg-white text-[#756b78] border-[#e1d6e6]"}`}>{title}</button>)}</div>}
+    <div className="grid lg:grid-cols-[280px_1fr] gap-5 items-start">
+      <aside className="rounded-3xl border border-[#e1d6e6] bg-white p-5 lg:sticky lg:top-40"><span className="text-[10px] uppercase tracking-wider font-bold text-[#8a6924]">{devotion === "rosario" ? setTitle : "Nove saudações"}</span><div className="space-y-2 mt-4">{(devotion === "rosario" ? rosaryScripture[setTitle] : angelicChoirs).map((item, index) => <button key={item[0]} onClick={() => { setStep(index); setBead(0) }} className={`w-full text-left rounded-xl p-3 text-xs border ${step === index ? "bg-[#f1e8f7] text-[#5b159d] border-[#c6a9d4]" : "bg-[#fffdf8] text-[#756b78] border-[#eee7f0]"}`}><strong>{index + 1}. {item[0]}</strong>{devotion === "rosario" && <span className="block mt-1">{item[1]}</span>}</button>)}</div></aside>
+      <main className="rounded-[2rem] border border-[#dfd3e5] bg-gradient-to-br from-white to-[#faf4fc] p-6 sm:p-10">
+        <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#8a6924]">{devotion === "rosario" ? `${step + 1}º mistério` : `${step + 1}ª saudação · ${choir[0]}`}</span><h3 className="text-3xl sm:text-4xl font-bold text-[#2c2030] mt-3" style={{ fontFamily: "Georgia, serif" }}>{devotion === "rosario" ? mystery[0] : `Em honra ao coro dos ${choir[0]}`}</h3>
+        {devotion === "rosario" ? <><div className="rounded-2xl bg-[#f5ead0] p-5 mt-6"><strong className="text-sm text-[#795911]">Leitura bíblica · {mystery[1]}</strong><p className="text-sm text-[#65596a] mt-2">Abra a passagem em sua Bíblia, leia devagar e permaneça um instante em silêncio.</p></div><p className="text-base text-[#5e5263] leading-relaxed mt-5"><strong>Intenção:</strong> {mystery[2]}</p></> : <p className="text-base text-[#5e5263] leading-relaxed mt-6">{choir[1]} Reze um Pai-Nosso e três Ave-Marias.</p>}
+        <div className="grid md:grid-cols-2 gap-3 mt-7"><PrayerText title="Pai-Nosso" /><PrayerText title="Ave-Maria" /></div>
+        <div className="mt-7 rounded-3xl border border-[#d8c9df] bg-white p-5 text-center"><p className="text-xs uppercase tracking-wider font-bold text-[#5b159d]">{devotion === "rosario" ? "Dez Ave-Marias" : "Três Ave-Marias"}</p><div className="flex flex-wrap justify-center gap-2 mt-4">{Array.from({ length: maxBeads }, (_, index) => <button key={index} onClick={() => setBead(index + 1)} aria-label={`Ave-Maria ${index + 1}`} className={`w-10 h-10 rounded-full border font-bold text-xs transition ${index < bead ? "bg-[#5b159d] text-white border-[#5b159d]" : "bg-[#f8f2fa] text-[#806d87] border-[#d8c9df]"}`}>{index + 1}</button>)}</div><p className="text-sm text-[#756b78] mt-4">{bead} de {maxBeads} Ave-Marias</p></div>
+        {devotion === "rosario" && <div className="mt-4"><PrayerText title="Glória ao Pai" /></div>}
+        <div className="flex items-center justify-between gap-3 mt-7"><button onClick={() => { setStep((value) => Math.max(value - 1, 0)); setBead(0) }} disabled={step === 0} className="rounded-xl border border-[#d9cce0] bg-white px-4 py-3 text-sm font-bold disabled:opacity-30"><ChevronLeft size={15} className="inline" /> Anterior</button><button onClick={nextStep} disabled={step === (devotion === "rosario" ? 4 : 8)} className="rounded-xl bg-[#8a6924] text-white px-4 py-3 text-sm font-bold disabled:opacity-30">Próxima parte <ChevronRight size={15} className="inline" /></button></div>
+      </main>
+    </div>
+    <div className="mt-6 rounded-2xl border border-[#e1d6e6] bg-white p-5 text-sm text-[#65596a] leading-relaxed">{devotion === "rosario" ? "Ao concluir os cinco mistérios, reze a Salve-Rainha e apresente suas intenções. Fonte para a estrutura e os mistérios: Rosarium Virginis Mariae e guia do Rosário da Santa Sé." : "Depois das nove saudações, a tradição conclui com quatro Pai-Nossos: em honra a São Miguel, São Gabriel, São Rafael e ao Anjo da Guarda. Fonte devocional consultada: Basílica de São Miguel Arcanjo."}</div>
+  </>
 }
 
 function SaintsView() {
