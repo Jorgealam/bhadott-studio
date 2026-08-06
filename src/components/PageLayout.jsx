@@ -119,7 +119,7 @@ export function PageHero({ badge, title, titleGrad, subtitle, children, theme = 
 }
 
 // Layout principal
-export default function PageLayout({ children, showBack = true, backLabel = "Voltar para Home", backTo = "/", theme = "dark" }) {
+export default function PageLayout({ children, showBack = true, backLabel = "Voltar para Home", backTo = "/", theme = "dark", customHeader = null, customFooter = null }) {
   const { pathname } = useLocation()
 
   // Scroll to top on route change
@@ -129,7 +129,7 @@ export default function PageLayout({ children, showBack = true, backLabel = "Vol
 
   return (
     <div className={`min-h-screen overflow-x-hidden ${theme === "catholic" ? "catholic-layout" : ""}`} style={{ background: theme === "catholic" ? "#fbf8f2" : "#020617" }}>
-      <Header />
+      {customHeader || <Header />}
 
       {showBack && (
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-0">
@@ -139,7 +139,7 @@ export default function PageLayout({ children, showBack = true, backLabel = "Vol
 
       <main>{children}</main>
 
-      <Footer />
+      {customFooter || <Footer />}
     </div>
   )
 }

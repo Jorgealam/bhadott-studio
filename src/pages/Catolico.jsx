@@ -64,6 +64,14 @@ const tabs = [
   { id: "catecismo", label: "Catecismo", icon: FileText },
 ]
 
+function CatholicHeader() {
+  return <header className="fixed inset-x-0 top-0 z-50 border-b border-[#e3d9e8] bg-[#fffdf8]/95 backdrop-blur-xl"><div className="max-w-7xl mx-auto h-16 lg:h-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4"><a href="#/catolico" className="flex items-center gap-3"><span className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5b159d] to-[#8a6924] text-white grid place-items-center"><Cross size={19} /></span><span><strong className="block text-[#2c2030] leading-none">BHADOTT Católico</strong><small className="text-[10px] uppercase tracking-[0.18em] text-[#8a6924]">Fé · leitura · oração</small></span></a><nav className="hidden md:flex items-center gap-5 text-sm font-semibold text-[#756b78]" aria-label="Canal Católico"><a href="#/catolico?secao=evangelho" className="hover:text-[#5b159d]">Evangelho</a><a href="#/catolico?secao=santos" className="hover:text-[#5b159d]">Santos</a><a href="#/catolico?secao=biblioteca" className="hover:text-[#5b159d]">Biblioteca</a></nav><a href="#/portal" className="rounded-xl border border-[#d9cce0] bg-white px-3 sm:px-4 py-2.5 text-xs font-bold text-[#5b159d]">Portal BHADOTT</a></div></header>
+}
+
+function CatholicFooter() {
+  return <footer className="border-t border-[#ded3e4] bg-[#f3eaf8] text-[#433847]"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-9"><div><div className="flex items-center gap-3"><span className="w-10 h-10 rounded-xl bg-[#5b159d] text-white grid place-items-center"><Cross size={19} /></span><div><strong className="block">BHADOTT Católico</strong><small className="text-[#806d87]">Um canal do BHADOTT Studio</small></div></div><p className="text-sm text-[#756b78] leading-relaxed mt-5">Conteúdo gratuito para oração, leitura e formação, organizado com respeito às fontes e à tradição católica.</p></div><div><h3 className="text-xs uppercase tracking-wider font-bold text-[#8a6924]">Vida de fé</h3><div className="grid gap-3 mt-4 text-sm"><a href="#/catolico?secao=evangelho">Evangelho do Dia</a><a href="#/catolico?secao=oracoes">Orações</a><a href="#/catolico?secao=rosario">Rosário</a><a href="#/catolico?secao=santos">Santos</a></div></div><div><h3 className="text-xs uppercase tracking-wider font-bold text-[#8a6924]">Estudo</h3><div className="grid gap-3 mt-4 text-sm"><a href="#/catolico?secao=biblioteca">Biblioteca Católica</a><a href="#/catolico?secao=leitor">Livros no portal</a><a href="#/catolico?secao=formacao">Formação</a><a href="#/catolico?secao=catecismo">Catecismo</a></div></div><div><h3 className="text-xs uppercase tracking-wider font-bold text-[#8a6924]">Canal</h3><div className="grid gap-3 mt-4 text-sm"><a href="#/catolico?secao=curiosidades">Curiosidades Católicas</a><a href="#/catolico?secao=loja">Materiais gratuitos</a><a href="#/contato">Contato e sugestões</a><a href="#/portal">Voltar ao Portal BHADOTT</a></div></div></div><div className="mt-10 pt-6 border-t border-[#d9cce0] flex flex-col sm:flex-row gap-2 justify-between text-xs text-[#806f86]"><span>© 2026 BHADOTT Católico · Conteúdo gratuito</span><span>Parte do ecossistema BHADOTT Studio</span></div></div></footer>
+}
+
 function SectionHeading({ eyebrow, title, description }) {
   return (
     <div className="max-w-3xl mb-9">
@@ -474,8 +482,13 @@ function CatechismView() {
 
 export default function Catolico() {
   const [activeTab, setActiveTab] = useState(() => new URLSearchParams(window.location.hash.split("?")[1] || "").get("secao") || "inicio")
+  useEffect(() => {
+    const syncSection = () => setActiveTab(new URLSearchParams(window.location.hash.split("?")[1] || "").get("secao") || "inicio")
+    window.addEventListener("hashchange", syncSection)
+    return () => window.removeEventListener("hashchange", syncSection)
+  }, [])
   return (
-    <PageLayout backLabel="Voltar para o Portal" backTo="/portal" theme="catholic">
+    <PageLayout backLabel="Voltar para o Portal" backTo="/portal" theme="catholic" customHeader={<CatholicHeader />} customFooter={<CatholicFooter />}>
       <div className="catholic-theme">
       <PageHero badge="Fé · Leitura · Oração" title="Área" titleGrad="Católica" subtitle="Um espaço sereno para rezar, estudar e descobrir a riqueza da tradição cristã." theme="catholic">
         <div className="mt-8 inline-flex items-center gap-2 text-xs text-[#8a6924]"><BookHeart size={14} aria-hidden="true" /> Conteúdo gratuito, introdutório e cuidadosamente organizado</div>

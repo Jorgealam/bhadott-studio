@@ -1,4 +1,4 @@
-const CACHE_NAME = "bhadott-studio-v1"
+const CACHE_NAME = "bhadott-studio-v2"
 const APP_SHELL = ["./", "./site.webmanifest", "./favicon.svg"]
 
 self.addEventListener("install", (event) => {
