@@ -57,7 +57,7 @@ function FormField({ label, error, children }) {
 export default function Contato() {
   const [form, setForm] = useState({ name: "", email: "", subject: subjects[0], message: "" })
   const [errors, setErrors] = useState({})
-  const [sent, setSent] = useState(false)
+  const [emailPrepared, setEmailPrepared] = useState(false)
   const formRef = useRef(null)
   const isInView = useInView(formRef, { once: true, margin: "-40px" })
   const navigate = useNavigate()
@@ -76,9 +76,10 @@ export default function Contato() {
     const errs = validate()
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     setErrors({})
-    // Front-end only: simula envio
-    // Fase back-end: substituir por fetch('/api/contact', { method:'POST', body: JSON.stringify(form) })
-    setTimeout(() => setSent(true), 400)
+    const subject = encodeURIComponent(`[BHADOTT Studio] ${form.subject}`)
+    const body = encodeURIComponent(`Nome: ${form.name}\nE-mail para retorno: ${form.email}\n\n${form.message}`)
+    setEmailPrepared(true)
+    window.location.href = `mailto:contact@bhadott.studio?subject=${subject}&body=${body}`
   }
 
   const onFocus = (e) => { e.target.style.borderColor = "rgba(59,130,246,0.4)" }
@@ -192,7 +193,7 @@ export default function Contato() {
               transition={{ delay: 0.1, duration: 0.55 }}
               className="lg:col-span-3"
             >
-              {sent ? (
+              {emailPrepared ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -204,16 +205,16 @@ export default function Contato() {
                     className="text-2xl font-black text-white mb-2"
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
-                    Mensagem enviada!
+                    E-mail preparado
                   </h3>
                   <p className="text-slate-400 text-sm mb-6 max-w-xs">
-                    Retornaremos em até 24 horas úteis. Obrigado por entrar em contato com o BHADOTT Studio.
+                    Seu aplicativo de e-mail foi aberto com a mensagem preenchida. Revise o conteúdo e pressione enviar por lá.
                   </p>
                   <button
-                    onClick={() => { setSent(false); setForm({ name: "", email: "", subject: subjects[0], message: "" }) }}
+                    onClick={() => { setEmailPrepared(false); setForm({ name: "", email: "", subject: subjects[0], message: "" }) }}
                     className="text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors"
                   >
-                    Enviar outra mensagem
+                    Preparar outra mensagem
                   </button>
                 </motion.div>
               ) : (
@@ -280,7 +281,7 @@ export default function Contato() {
                   </FormField>
 
                   <p className="text-slate-700 text-xs">
-                    Este formulário é apenas para contato. Nenhum dado é armazenado — as mensagens são enviadas diretamente para nossa caixa de entrada.
+                    Nenhum dado é armazenado pelo site. Ao continuar, seu aplicativo de e-mail será aberto; a mensagem só será enviada quando você confirmar por lá.
                   </p>
 
                   <motion.button
@@ -291,7 +292,7 @@ export default function Contato() {
                     style={{ background: "linear-gradient(135deg, #3b82f6, #7c3aed)", boxShadow: "0 0 18px rgba(59,130,246,0.3)" }}
                   >
                     <Send size={15} aria-hidden="true" />
-                    Enviar Mensagem
+                    Preparar E-mail
                   </motion.button>
                 </form>
               )}
