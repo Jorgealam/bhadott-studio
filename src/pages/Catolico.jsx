@@ -12,6 +12,9 @@ import {
   Sparkles,
   SunMedium,
   Users,
+  Cross,
+  ScrollText,
+  ShieldCheck,
 } from "lucide-react"
 import PageLayout, { GlowDivider, PageHero } from "../components/PageLayout"
 import {
@@ -21,6 +24,11 @@ import {
   rosaryMysteries,
   saints,
   traditionalPrayers,
+  catechismTopics,
+  examinationOfConscience,
+  lectioDivinaSteps,
+  novenas,
+  stationsOfTheCross,
 } from "../data/catholicContent"
 
 const tabs = [
@@ -30,6 +38,7 @@ const tabs = [
   { id: "santos", label: "Santos", icon: Users },
   { id: "roteiros", label: "Roteiros", icon: BookOpen },
   { id: "biblioteca", label: "Biblioteca", icon: Library },
+  { id: "formacao", label: "Formação", icon: ScrollText },
 ]
 
 function SectionHeading({ eyebrow, title, description }) {
@@ -51,7 +60,7 @@ function StartView({ setActiveTab }) {
           <button key={id} onClick={() => setActiveTab(id)} className="group p-6 text-left rounded-3xl border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.045] to-transparent hover:border-amber-200/20 transition-all focus-ring">
             <Icon size={22} className="text-amber-300 mb-5" aria-hidden="true" />
             <h3 className="text-lg font-bold text-[#fffaf0]" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>{label}</h3>
-            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : "Clássicos espirituais e acervos de domínio público."}</p>
+            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : "Clássicos espirituais e acervos de domínio público."}</p>
           </button>
         ))}
       </div>
@@ -207,6 +216,32 @@ function LibraryView() {
   )
 }
 
+function FormationView() {
+  const [section, setSection] = useState("lectio")
+  const sections = [
+    ["lectio", "Lectio Divina"], ["via-sacra", "Via-Sacra"], ["novenas", "Novenas"],
+    ["catecismo", "Catecismo"], ["exame", "Exame de consciência"],
+  ]
+  return (
+    <>
+      <SectionHeading eyebrow="Formação e prática" title="Guias para caminhar com profundidade" description="Roteiros completos para uso pessoal e em família. Os resumos catequéticos são autorais e indicam os parágrafos oficiais para aprofundamento." />
+      <div className="flex gap-2 overflow-x-auto pb-2 mb-8" aria-label="Conteúdos de formação">
+        {sections.map(([id, label]) => <button key={id} onClick={() => setSection(id)} className={`flex-shrink-0 px-4 py-2.5 rounded-xl border text-xs font-bold focus-ring ${section === id ? "border-amber-300/25 bg-amber-500/10 text-amber-200" : "border-white/7 text-slate-500"}`}>{label}</button>)}
+      </div>
+
+      {section === "lectio" && <div className="grid md:grid-cols-5 gap-3">{lectioDivinaSteps.map((step, index) => <article key={step.latin} className="p-5 rounded-2xl border border-blue-300/10 bg-blue-500/[0.03]"><span className="text-[10px] text-blue-300 uppercase tracking-widest">{index + 1} · {step.latin}</span><h3 className="text-lg text-white font-bold mt-3" style={{ fontFamily: "Georgia, serif" }}>{step.title}</h3><p className="text-sm text-slate-500 leading-relaxed mt-3">{step.prompt}</p></article>)}</div>}
+
+      {section === "via-sacra" && <div><p className="text-sm text-slate-400 mb-6 max-w-3xl">Em cada estação: faça o Sinal da Cruz, anuncie a estação, leia a referência em sua Bíblia, medite a intenção e conclua com um Pai-Nosso, Ave-Maria ou oração espontânea.</p><div className="grid md:grid-cols-2 gap-3">{stationsOfTheCross.map((station) => <article key={station.number} className="p-5 rounded-2xl border border-red-300/10 bg-red-500/[0.025] flex gap-4"><span className="w-9 h-9 flex-shrink-0 rounded-full bg-red-500/10 text-red-200 grid place-items-center font-bold">{station.number}</span><div><h3 className="text-white font-bold" style={{ fontFamily: "Georgia, serif" }}>{station.title}</h3><span className="text-[10px] text-red-200/70">{station.reference}</span><p className="text-sm text-slate-500 mt-2 leading-relaxed">{station.reflection}</p></div></article>)}</div></div>}
+
+      {section === "novenas" && <div><p className="text-sm text-slate-400 mb-6 max-w-3xl">Estrutura sugerida para cada dia: Sinal da Cruz, intenção, leitura bíblica relacionada ao tema, reflexão silenciosa, Pai-Nosso, Ave-Maria, Glória e compromisso concreto.</p><div className="grid md:grid-cols-2 gap-4">{novenas.map((novena) => <article key={novena.title} className="p-6 rounded-3xl border border-violet-300/10 bg-violet-500/[0.03]"><Cross size={19} className="text-violet-300" /><h3 className="text-xl text-white font-bold mt-4" style={{ fontFamily: "Georgia, serif" }}>{novena.title}</h3><p className="text-xs text-violet-200/60 mt-1">{novena.occasion}</p><p className="text-sm text-slate-500 mt-3">{novena.intention}</p><ol className="grid grid-cols-3 gap-2 mt-5">{novena.days.map((day, index) => <li key={day} className="text-[11px] text-slate-400 border border-white/6 rounded-lg p-2"><strong className="text-violet-300">Dia {index + 1}</strong><br />{day}</li>)}</ol></article>)}</div></div>}
+
+      {section === "catecismo" && <div><div className="grid md:grid-cols-2 gap-4">{catechismTopics.map((topic) => <article key={topic.title} className="p-6 rounded-2xl border border-amber-200/10 bg-amber-100/[0.025]"><span className="text-[10px] text-amber-300 uppercase tracking-wider">{topic.refs}</span><h3 className="text-lg text-white font-bold mt-2" style={{ fontFamily: "Georgia, serif" }}>{topic.title}</h3><p className="text-sm text-slate-500 leading-relaxed mt-3">{topic.summary}</p></article>)}</div><a href="https://www.vatican.va/archive/cathechism_po/index_new/prima-pagina-cic_po.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-6 px-4 py-3 rounded-xl border border-amber-300/15 text-sm text-amber-200 focus-ring">Consultar o Catecismo oficial <ExternalLink size={14} /></a></div>}
+
+      {section === "exame" && <div className="max-w-4xl"><div className="p-6 rounded-3xl border border-emerald-300/10 bg-emerald-500/[0.025]"><ShieldCheck size={22} className="text-emerald-300" /><p className="text-sm text-slate-400 leading-relaxed mt-4">Comece pedindo luz e serenidade. Recorde também o bem recebido e realizado. Estas perguntas ajudam a preparar uma revisão pessoal; não substituem orientação pastoral nem o sacramento da Reconciliação.</p></div><ol className="space-y-3 mt-5">{examinationOfConscience.map((question, index) => <li key={question} className="p-4 rounded-xl border border-white/7 bg-white/[0.02] flex gap-3 text-sm text-slate-300"><span className="text-emerald-300 font-bold">{index + 1}</span>{question}</li>)}</ol><p className="text-sm text-slate-500 mt-6">Conclua agradecendo a misericórdia de Deus, faça um propósito concreto e reze um Ato de Contrição.</p></div>}
+    </>
+  )
+}
+
 export default function Catolico() {
   const [activeTab, setActiveTab] = useState("inicio")
   return (
@@ -232,6 +267,7 @@ export default function Catolico() {
           {activeTab === "santos" && <SaintsView />}
           {activeTab === "roteiros" && <ReadingPlansView />}
           {activeTab === "biblioteca" && <LibraryView />}
+          {activeTab === "formacao" && <FormationView />}
         </div>
       </section>
     </PageLayout>

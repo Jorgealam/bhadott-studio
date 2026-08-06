@@ -167,6 +167,72 @@ export const publicDomainLibrary = [
   { title: "Suma Teológica", author: "São Tomás de Aquino", era: "séc. XIII", theme: "Teologia, ética e filosofia", query: "Thomas Aquinas Summa Theologica" },
   { title: "Legenda Maior de São Francisco", author: "São Boaventura", era: "séc. XIII", theme: "Vida de São Francisco", query: "Bonaventure Life Saint Francis" },
   { title: "As Florinhas de São Francisco", author: "Tradição franciscana", era: "séc. XIV", theme: "Relatos da espiritualidade franciscana", query: "Little Flowers Saint Francis" },
+  { title: "A Cidade de Deus", author: "Santo Agostinho", era: "séc. V", theme: "História, sociedade e esperança cristã", query: "Augustine City of God" },
+  { title: "Regra Pastoral", author: "São Gregório Magno", era: "séc. VI", theme: "Serviço, prudência e cuidado pastoral", query: "Gregory Great Pastoral Rule" },
+  { title: "Regra de São Bento", author: "São Bento", era: "séc. VI", theme: "Oração, trabalho e vida comunitária", query: "Rule Saint Benedict" },
+  { title: "A Consolação da Filosofia", author: "Boécio", era: "séc. VI", theme: "Providência, liberdade e felicidade", query: "Boethius Consolation Philosophy" },
+  { title: "Itinerário da Mente para Deus", author: "São Boaventura", era: "séc. XIII", theme: "Contemplação e conhecimento de Deus", query: "Bonaventure Journey Mind God" },
+  { title: "O Combate Espiritual", author: "Lourenço Scupoli", era: "séc. XVI", theme: "Disciplina interior e virtudes", query: "Scupoli Spiritual Combat" },
+  { title: "Subida do Monte Carmelo", author: "São João da Cruz", era: "séc. XVI", theme: "Purificação e união com Deus", query: "John Cross Ascent Mount Carmel" },
+  { title: "Noite Escura", author: "São João da Cruz", era: "séc. XVI", theme: "Caminho contemplativo", query: "John Cross Dark Night Soul" },
+  { title: "Tratado do Amor de Deus", author: "São Francisco de Sales", era: "séc. XVII", theme: "Caridade e vida espiritual", query: "Francis Sales Treatise Love God" },
+  { title: "Glórias de Maria", author: "Santo Afonso de Ligório", era: "séc. XVIII", theme: "Espiritualidade mariana", query: "Alphonsus Glories Mary" },
+  { title: "Preparação para a Morte", author: "Santo Afonso de Ligório", era: "séc. XVIII", theme: "Conversão e esperança", query: "Alphonsus Preparation Death" },
+  { title: "Ortodoxia", author: "G. K. Chesterton", era: "séc. XX", theme: "Fé, razão e imaginação", query: "Chesterton Orthodoxy" },
+]
+
+export const lectioDivinaSteps = [
+  { latin: "Lectio", title: "Leitura", prompt: "Leia o trecho devagar, mais de uma vez. O que o texto diz em si? Observe pessoas, ações, repetições e contexto." },
+  { latin: "Meditatio", title: "Meditação", prompt: "Qual palavra ou frase tocou você? O que Deus pode estar mostrando à sua vida concreta por meio dela?" },
+  { latin: "Oratio", title: "Oração", prompt: "Responda com sinceridade: agradeça, peça perdão, apresente uma necessidade ou simplesmente converse com Deus." },
+  { latin: "Contemplatio", title: "Contemplação", prompt: "Permaneça alguns minutos em silêncio amoroso, sem tentar produzir muitas ideias." },
+  { latin: "Actio", title: "Ação", prompt: "Escolha um gesto pequeno, específico e possível para viver hoje o que foi rezado." },
+]
+
+export const stationsOfTheCross = [
+  ["Jesus é condenado à morte", "Jo 19,14-16", "Rezemos por quem sofre injustiça e por nossa coragem de defender a verdade."],
+  ["Jesus recebe a cruz", "Jo 19,17", "Entreguemos a Cristo os pesos que carregamos e os daqueles que caminham conosco."],
+  ["Jesus cai pela primeira vez", "Is 53,4-5", "Peçamos força para levantar depois das primeiras quedas."],
+  ["Jesus encontra sua Mãe", "Lc 2,34-35", "Recordemos as mães e famílias que acompanham silenciosamente o sofrimento."],
+  ["Simão Cireneu ajuda Jesus", "Lc 23,26", "Peçamos olhos atentos para perceber quem precisa de ajuda concreta."],
+  ["Verônica enxuga o rosto de Jesus", "Mt 25,40", "Rezemos pela ternura que reconhece a dignidade de cada pessoa."],
+  ["Jesus cai pela segunda vez", "Sl 38,7-10", "Confiemos a Deus nossas recaídas e o esforço paciente de recomeçar."],
+  ["Jesus consola as mulheres", "Lc 23,27-31", "Peçamos uma compaixão que também se transforma em conversão."],
+  ["Jesus cai pela terceira vez", "Lm 3,27-32", "Rezemos por quem pensa não conseguir mais continuar."],
+  ["Jesus é despojado das vestes", "Jo 19,23-24", "Recordemos quem perdeu casa, segurança, reputação ou dignidade."],
+  ["Jesus é pregado na cruz", "Lc 23,33-34", "Peçamos a graça do perdão, mesmo quando ele exige tempo e cura."],
+  ["Jesus morre na cruz", "Jo 19,28-30", "Façamos silêncio e confiemos a Cristo os falecidos e os que estão perto da morte."],
+  ["Jesus é descido da cruz", "Jo 19,38", "Rezemos por todos os que cuidam de pessoas feridas e enlutadas."],
+  ["Jesus é colocado no sepulcro", "Jo 19,40-42", "Na espera da Ressurreição, entreguemos a Deus aquilo que ainda não compreendemos."],
+].map(([title, reference, reflection], index) => ({ number: index + 1, title, reference, reflection }))
+
+export const novenas = [
+  { title: "Novena ao Espírito Santo", occasion: "Preparação para Pentecostes", intention: "Dons do Espírito, unidade e renovação", days: ["Sabedoria", "Entendimento", "Conselho", "Fortaleza", "Ciência", "Piedade", "Temor de Deus", "Frutos do Espírito", "Envio e unidade"] },
+  { title: "Novena de Natal", occasion: "De 16 a 24 de dezembro", intention: "Preparar o coração para a vinda de Cristo", days: ["Promessa", "Esperança", "Profetas", "Anunciação", "Serviço", "José", "Belém", "Vigília", "Nascimento"] },
+  { title: "Novena a São José", occasion: "Pode preceder 19 de março", intention: "Famílias, trabalhadores e confiança em Deus", days: ["Homem justo", "Escuta", "Coragem", "Trabalho", "Família", "Silêncio", "Proteção", "Fidelidade", "Boa morte"] },
+  { title: "Novena de Nossa Senhora Aparecida", occasion: "Pode preceder 12 de outubro", intention: "Brasil, famílias e pessoas em necessidade", days: ["Encontro", "Fé", "Humildade", "Comunhão", "Esperança", "Justiça", "Cuidado", "Missão", "Gratidão"] },
+]
+
+export const catechismTopics = [
+  { title: "Deus e a fé", refs: "CIC 26–184", summary: "A fé é resposta livre do ser humano a Deus, que se revela e convida à comunhão." },
+  { title: "A Sagrada Escritura", refs: "CIC 101–141", summary: "A Igreja acolhe a Escritura como Palavra de Deus expressa em palavras humanas e lida na Tradição viva." },
+  { title: "Jesus Cristo", refs: "CIC 422–682", summary: "O centro da fé cristã é Jesus Cristo: sua Encarnação, vida, morte, Ressurreição e promessa de retorno." },
+  { title: "O Espírito Santo", refs: "CIC 683–747", summary: "O Espírito dá vida, conduz a Igreja, distribui dons e forma em nós a vida de Cristo." },
+  { title: "Os sete sacramentos", refs: "CIC 1113–1666", summary: "Sinais eficazes da graça ligados a Cristo e confiados à Igreja, acompanhando toda a vida cristã." },
+  { title: "A dignidade humana", refs: "CIC 1699–1876", summary: "Criada à imagem de Deus, cada pessoa possui dignidade e é chamada à liberdade, à virtude e à bem-aventurança." },
+  { title: "Os Dez Mandamentos", refs: "CIC 2052–2557", summary: "Os mandamentos orientam o amor a Deus e ao próximo e encontram plenitude no ensinamento de Jesus." },
+  { title: "A oração cristã", refs: "CIC 2558–2865", summary: "A oração é relação viva com Deus: dom, aliança e comunhão, aprendida especialmente com o Pai-Nosso." },
+]
+
+export const examinationOfConscience = [
+  "Tenho reservado tempo sincero para Deus ou vivido como se Ele não importasse?",
+  "Tratei o nome de Deus, a fé e as pessoas com respeito?",
+  "Cuidei das responsabilidades com minha família, trabalho, estudo e comunidade?",
+  "Ferí alguém por palavras, indiferença, ira, preconceito ou omissão?",
+  "Usei pessoas como objetos ou deixei de respeitar minha dignidade e a dos outros?",
+  "Fui honesto com dinheiro, bens, compromissos e com a verdade?",
+  "Alimentei inveja, ressentimento, orgulho ou falta de perdão?",
+  "Que bem eu poderia ter feito e, por comodismo, deixei de fazer?",
 ]
 
 export const liturgicalSeasons = [
