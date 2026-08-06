@@ -6,16 +6,16 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Compass, Menu, X } from "lucide-react"
+import { ChevronDown, Compass, Menu, X } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
+import PortalMenu from "./PortalMenu"
+import { portalAreas } from "../data/portalAreas"
 
 // Mistura de rotas reais e âncoras da home
 const navLinks = [
   { label: "Home",      href: "/",         type: "route"  },
-  { label: "Explorar",  href: "/portal",   type: "route", featured: true },
   { label: "Projetos",  href: "/projetos", type: "route"  },
   { label: "Agro",      href: "/agro",     type: "route"  },
-  { label: "Serviços",  href: "#servicos", type: "anchor" },
   { label: "Blog",      href: "/blog",     type: "route"  },
   { label: "Suporte",   href: "/suporte",  type: "route"  },
   { label: "Contato",   href: "/contato",  type: "route"  },
@@ -52,6 +52,7 @@ function BhadottLogo({ size = 34 }) {
 export default function Header() {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [portalOpen, setPortalOpen] = useState(false)
   const menuRef  = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
@@ -64,9 +65,12 @@ export default function Header() {
 
   // Fechar ao clicar fora
   useEffect(() => {
-    if (!mobileOpen) return
+    if (!mobileOpen && !portalOpen) return
     const handler = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) setMobileOpen(false)
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMobileOpen(false)
+        setPortalOpen(false)
+      }
     }
     document.addEventListener("mousedown", handler)
     document.addEventListener("touchstart", handler)
@@ -74,7 +78,7 @@ export default function Header() {
       document.removeEventListener("mousedown", handler)
       document.removeEventListener("touchstart", handler)
     }
-  }, [mobileOpen])
+  }, [mobileOpen, portalOpen])
 
   // Travar scroll ao abrir menu mobile
   useEffect(() => {
@@ -85,6 +89,7 @@ export default function Header() {
   const handleNavClick = (e, link) => {
     e.preventDefault()
     setMobileOpen(false)
+    setPortalOpen(false)
 
     if (link.type === "route") {
       navigate(link.href)
@@ -160,6 +165,21 @@ export default function Header() {
 
           {/* ── Desktop Nav ── */}
           <nav className="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
+            <div className="relative">
+              <button
+                onClick={() => setPortalOpen((open) => !open)}
+                className={`relative inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg transition-all duration-200 font-medium focus-ring ${
+                  location.pathname.startsWith("/portal") ? "text-blue-400" : "text-slate-400 hover:text-blue-400"
+                }`}
+                aria-expanded={portalOpen}
+                aria-haspopup="true"
+              >
+                <Compass size={13} aria-hidden="true" />
+                Explorar
+                <ChevronDown size={13} className={`transition-transform ${portalOpen ? "rotate-180" : ""}`} aria-hidden="true" />
+              </button>
+              <AnimatePresence>{portalOpen && <PortalMenu onNavigate={() => setPortalOpen(false)} />}</AnimatePresence>
+            </div>
             {navLinks.map((link) => {
               const active = isActive(link)
               return (
@@ -171,10 +191,7 @@ export default function Header() {
                     active ? "text-blue-400" : "text-slate-400 hover:text-blue-400"
                   }`}
                 >
-                  <span className="inline-flex items-center gap-1.5">
-                    {link.featured && <Compass size={13} aria-hidden="true" />}
-                    {link.label}
-                  </span>
+                  {link.label}
                   <span
                     className={`absolute bottom-1 left-3 right-3 h-px bg-blue-500 rounded-full transition-transform duration-200 ${
                       active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
@@ -261,6 +278,47 @@ export default function Header() {
             />
 
             <nav className="px-4 py-4 flex flex-col gap-1" aria-label="Mobile menu">
+              <motion.button
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                onClick={() => setPortalOpen((open) => !open)}
+                className="flex items-center justify-between px-4 py-3.5 rounded-xl text-blue-300 bg-blue-500/8 font-semibold text-base touch-target focus-ring"
+                aria-expanded={portalOpen}
+              >
+                <span className="inline-flex items-center gap-2"><Compass size={17} aria-hidden="true" /> Explorar o portal</span>
+                <ChevronDown size={16} className={`transition-transform ${portalOpen ? "rotate-180" : ""}`} aria-hidden="true" />
+              </motion.button>
+
+              <AnimatePresence>
+                {portalOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="grid grid-cols-2 gap-1 overflow-hidden px-1 pb-2"
+                  >
+                    {portalAreas.map((area) => {
+                      const Icon = area.icon
+                      return (
+                        <button
+                          key={area.id}
+                          onClick={() => {
+                            navigate(area.route || `/portal/${area.id}`)
+                            setMobileOpen(false)
+                            setPortalOpen(false)
+                            window.scrollTo(0, 0)
+                          }}
+                          className="flex items-center gap-2 p-3 text-left text-xs text-slate-400 hover:text-white rounded-xl hover:bg-white/5 focus-ring"
+                        >
+                          <Icon size={14} className="text-blue-400" aria-hidden="true" />
+                          {area.shortLabel || area.label}
+                        </button>
+                      )
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {navLinks.map((link, i) => {
                 const active = isActive(link)
                 return (
