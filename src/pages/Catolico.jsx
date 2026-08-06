@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {
   BookHeart,
   BookOpen,
   CalendarDays,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Church,
   ExternalLink,
   Heart,
@@ -29,6 +31,8 @@ import {
   lectioDivinaSteps,
   novenas,
   stationsOfTheCross,
+  portalBooks,
+  prayerLanguages,
 } from "../data/catholicContent"
 
 const tabs = [
@@ -39,6 +43,7 @@ const tabs = [
   { id: "roteiros", label: "Roteiros", icon: BookOpen },
   { id: "biblioteca", label: "Biblioteca", icon: Library },
   { id: "formacao", label: "Formação", icon: ScrollText },
+  { id: "leitor", label: "Leitor", icon: BookOpen },
 ]
 
 function SectionHeading({ eyebrow, title, description }) {
@@ -60,7 +65,7 @@ function StartView({ setActiveTab }) {
           <button key={id} onClick={() => setActiveTab(id)} className="group p-6 text-left rounded-3xl border border-amber-200/10 bg-gradient-to-br from-amber-100/[0.045] to-transparent hover:border-amber-200/20 transition-all focus-ring">
             <Icon size={22} className="text-amber-300 mb-5" aria-hidden="true" />
             <h3 className="text-lg font-bold text-[#fffaf0]" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>{label}</h3>
-            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : "Clássicos espirituais e acervos de domínio público."}</p>
+            <p className="text-sm text-slate-500 mt-2">{id === "oracoes" ? "Orações tradicionais para diferentes momentos." : id === "rosario" ? "Mistérios e um guia simples para começar." : id === "santos" ? "Vidas que testemunham diferentes caminhos de santidade." : id === "roteiros" ? "Planos de leitura bíblica e preparação dominical." : id === "formacao" ? "Lectio Divina, Via-Sacra, novenas, catequese e exame." : id === "leitor" ? "Livros completos para ler sem sair do portal." : "Clássicos espirituais e acervos de domínio público."}</p>
           </button>
         ))}
       </div>
@@ -115,6 +120,12 @@ function PrayersView() {
             </article>
           )
         })}
+      </div>
+      <div className="mt-14">
+        <SectionHeading eyebrow="Línguas da tradição" title="O Pai-Nosso em outras línguas" description="Estas versões ajudam no estudo e na oração. O grego preserva a língua do texto do Novo Testamento; o latim representa a tradição litúrgica ocidental. Versões hebraicas e aramaicas serão incluídas somente após validação de uma fonte eclesial confiável, pois não existe uma única reconstrução consensual para apresentá-las como ‘o original’." />
+        <div className="grid md:grid-cols-2 gap-4">
+          {prayerLanguages.map((version) => <article key={version.id} className="p-6 rounded-3xl border border-amber-200/10 bg-amber-100/[0.025]" dir={version.direction}><span className="text-[10px] uppercase tracking-widest text-amber-300">{version.language}</span><p className="text-xs text-slate-600 mt-1">{version.label}</p><p className="text-lg text-slate-200 leading-8 mt-5" style={{ fontFamily: "Georgia, serif" }}>{version.text}</p><a href={version.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[11px] text-blue-300 mt-5 focus-ring rounded">{version.source} <ExternalLink size={11} /></a></article>)}
+        </div>
       </div>
     </>
   )
@@ -242,6 +253,39 @@ function FormationView() {
   )
 }
 
+function ReaderView() {
+  const book = portalBooks[0]
+  const storageKey = `bhadott-reader-${book.id}`
+  const [page, setPage] = useState(() => {
+    const saved = Number(window.localStorage.getItem(storageKey))
+    return Number.isInteger(saved) && saved >= 0 && saved < book.pages.length ? saved : 0
+  })
+  useEffect(() => window.localStorage.setItem(storageKey, String(page)), [page, storageKey])
+  const current = book.pages[page]
+  const progress = ((page + 1) / book.pages.length) * 100
+  return (
+    <>
+      <SectionHeading eyebrow="Livro no portal" title={book.title} description={`${book.description} Seu progresso fica salvo somente neste aparelho.`} />
+      <div className="grid lg:grid-cols-[260px_1fr] gap-5 items-start">
+        <aside className="rounded-3xl border border-white/7 bg-white/[0.02] p-4 lg:sticky lg:top-40">
+          <p className="px-2 text-[10px] uppercase tracking-widest text-slate-600 mb-3">Sumário · {book.author}</p>
+          <div className="space-y-1 max-h-72 lg:max-h-[480px] overflow-y-auto">{book.pages.map((item, index) => <button key={item.title} onClick={() => setPage(index)} className={`w-full text-left px-3 py-2.5 rounded-xl text-xs focus-ring ${page === index ? "bg-amber-500/10 text-amber-200" : "text-slate-500 hover:text-slate-300"}`}><span className="mr-2 opacity-60">{index + 1}.</span>{item.title}</button>)}</div>
+        </aside>
+        <article className="rounded-[2rem] border border-amber-200/10 bg-gradient-to-br from-[#0d1424] to-[#060a14] overflow-hidden shadow-2xl shadow-black/20">
+          <div className="h-1 bg-white/5"><div className="h-full bg-gradient-to-r from-amber-400 to-orange-300 transition-all" style={{ width: `${progress}%` }} /></div>
+          <div className="px-6 py-10 sm:px-12 sm:py-14 max-w-3xl mx-auto min-h-[520px] flex flex-col">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-amber-300">Página {page + 1} de {book.pages.length}</span>
+            <h2 className="text-3xl sm:text-4xl text-[#fffaf0] font-bold mt-4" style={{ fontFamily: "Georgia, serif" }}>{current.title}</h2>
+            <div className="mt-8 space-y-5">{current.paragraphs.map((paragraph) => <p key={paragraph} className="text-base sm:text-lg text-slate-300 leading-8" style={{ fontFamily: "Georgia, serif" }}>{paragraph}</p>)}</div>
+            <div className="mt-9 p-5 rounded-2xl border border-blue-300/10 bg-blue-500/[0.035]"><strong className="text-xs uppercase tracking-wider text-blue-300">Para praticar</strong><p className="text-sm text-slate-400 mt-2 leading-relaxed">{current.practice}</p></div>
+            <div className="flex items-center justify-between gap-3 mt-auto pt-10"><button disabled={page === 0} onClick={() => setPage((value) => value - 1)} className="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-white/8 text-sm text-slate-300 disabled:opacity-30 focus-ring"><ChevronLeft size={16} /> Anterior</button><button disabled={page === book.pages.length - 1} onClick={() => setPage((value) => value + 1)} className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-300/20 text-sm text-amber-200 disabled:opacity-30 focus-ring">Próxima <ChevronRight size={16} /></button></div>
+          </div>
+        </article>
+      </div>
+    </>
+  )
+}
+
 export default function Catolico() {
   const [activeTab, setActiveTab] = useState("inicio")
   return (
@@ -268,6 +312,7 @@ export default function Catolico() {
           {activeTab === "roteiros" && <ReadingPlansView />}
           {activeTab === "biblioteca" && <LibraryView />}
           {activeTab === "formacao" && <FormationView />}
+          {activeTab === "leitor" && <ReaderView />}
         </div>
       </section>
     </PageLayout>

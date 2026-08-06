@@ -235,6 +235,48 @@ export const examinationOfConscience = [
   "Que bem eu poderia ter feito e, por comodismo, deixei de fazer?",
 ]
 
+export const portalBooks = [
+  {
+    id: "dez-passos-oracao",
+    title: "Dez passos para uma vida de oração",
+    author: "BHADOTT Studio",
+    description: "Um pequeno livro original para ler em dez encontros, sem sair do portal.",
+    pages: [
+      { title: "Começar como estamos", paragraphs: ["A oração não começa quando encontramos as palavras perfeitas. Ela começa quando nos apresentamos diante de Deus como realmente estamos: agradecidos ou cansados, confiantes ou confusos.", "Reserve alguns minutos, respire com calma e diga interiormente: ‘Senhor, aqui estou’. Não é preciso sentir algo extraordinário. A fidelidade humilde já é uma resposta de amor."], practice: "Hoje, permaneça dois minutos em silêncio e entregue a Deus seu estado verdadeiro." },
+      { title: "Criar um pequeno lugar", paragraphs: ["Um espaço simples ajuda o coração a reconhecer que aquele tempo possui uma finalidade. Pode ser uma cadeira, uma mesa com a Bíblia ou apenas um canto tranquilo.", "O lugar não é mágico. Ele educa nossos hábitos. Ao voltar ali, o corpo aprende a diminuir o ritmo e a atenção encontra um ponto de repouso."], practice: "Escolha um lugar e retire dele uma distração desnecessária." },
+      { title: "Escutar antes de falar", paragraphs: ["Muitas vezes chegamos à oração com uma lista pronta. A Escritura nos ensina também a escutar. Uma frase lida devagar pode iluminar aquilo que longas explicações não alcançam.", "Leia um pequeno trecho do Evangelho duas vezes. Na segunda leitura, perceba qual palavra permanece em você. Não force uma resposta."], practice: "Leia Marcos 1,16-20 e anote uma palavra que chamou sua atenção." },
+      { title: "Falar com simplicidade", paragraphs: ["A oração cristã não exige linguagem complicada. Podemos agradecer pelo alimento, apresentar uma pessoa doente, reconhecer uma falha ou pedir coragem para uma conversa difícil.", "Jesus nos oferece o Pai-Nosso como escola: começa em Deus, acolhe o pão necessário, abre o caminho do perdão e pede proteção."], practice: "Reze o Pai-Nosso lentamente, fazendo uma pausa depois de cada pedido." },
+      { title: "Agradecer concretamente", paragraphs: ["A gratidão não ignora o sofrimento. Ela reconhece que, mesmo em dias difíceis, recebemos sinais de cuidado: uma pessoa, uma oportunidade, um aprendizado ou a força para continuar.", "Nomear esses dons impede que tudo pareça automático e nos torna mais disponíveis para repartir."], practice: "Escreva três graças concretas recebidas nas últimas vinte e quatro horas." },
+      { title: "Aprender a pedir perdão", paragraphs: ["Reconhecer o erro diante de Deus não diminui nossa dignidade; abre espaço para a verdade e para a cura. A misericórdia não torna o mal pequeno, mas torna possível o recomeço.", "Um bom exame evita tanto a desculpa fácil quanto a culpa sem esperança. Pergunta com honestidade: o que fiz, quem foi afetado e qual reparação é possível?"], practice: "Recorde uma atitude a corrigir e escolha um primeiro gesto de reparação." },
+      { title: "Interceder pelos outros", paragraphs: ["Interceder é levar ao coração de Deus as necessidades de outras pessoas. Essa oração alarga nosso mundo e combate a indiferença.", "Podemos rezar por quem amamos, por quem não conhecemos e até por quem nos feriu. Às vezes a intercessão também revela uma ajuda concreta que nós mesmos podemos oferecer."], practice: "Apresente cinco nomes a Deus e pergunte se algum deles precisa de uma ação sua." },
+      { title: "Atravessar a aridez", paragraphs: ["Existem dias em que a oração parece vazia. Distrações aumentam e nenhuma emoção aparece. Isso não significa necessariamente ausência de Deus ou fracasso.", "A perseverança purifica nossas motivações. Voltamos não apenas pelo consolo, mas porque desejamos amar. Quando necessário, diminuímos o tempo sem abandonar o encontro."], practice: "Em um dia difícil, faça apenas o Sinal da Cruz, um salmo e um minuto de silêncio." },
+      { title: "Transformar oração em vida", paragraphs: ["A oração amadurece quando alcança nossas escolhas. O silêncio deve favorecer a escuta; a Palavra deve iluminar atitudes; a gratidão deve gerar generosidade.", "Antes de terminar, escolha sempre uma ação pequena e verificável. Assim, o encontro não fica isolado do restante do dia."], practice: "Pratique hoje uma obra discreta de paciência, serviço ou reconciliação." },
+      { title: "Recomeçar todos os dias", paragraphs: ["Uma vida de oração é construída por muitos recomeços. Perder um dia não apaga o caminho. O importante é retornar sem transformar a falha em desculpa para desistir.", "Com o tempo, experimente um ritmo possível: oração breve pela manhã, pausa no meio do dia e revisão agradecida à noite. A constância vale mais que planos grandiosos impossíveis de sustentar."], practice: "Defina um horário realista para os próximos sete dias e, ao final, reveja o que ajudou." },
+    ],
+  },
+]
+
+export const prayerLanguages = [
+  {
+    id: "latin",
+    language: "Latim",
+    label: "Tradição litúrgica latina",
+    direction: "ltr",
+    text: "Pater noster, qui es in caelis: sanctificetur nomen tuum; adveniat regnum tuum; fiat voluntas tua, sicut in caelo et in terra. Panem nostrum cotidianum da nobis hodie; et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris; et ne nos inducas in tentationem; sed libera nos a malo. Amen.",
+    source: "Catecismo da Igreja Católica em latim, 2759",
+    sourceUrl: "https://press.vatican.va/archive/catechism_lt/p4s2_lt.htm",
+  },
+  {
+    id: "greek",
+    language: "Grego",
+    label: "Forma litúrgica grega do Pai-Nosso",
+    direction: "ltr",
+    text: "Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς, ἁγιασθήτω τὸ ὄνομά σου· ἐλθέτω ἡ βασιλεία σου· γενηθήτω τὸ θέλημά σου, ὡς ἐν οὐρανῷ καὶ ἐπὶ τῆς γῆς. Τὸν ἄρτον ἡμῶν τὸν ἐπιούσιον δὸς ἡμῖν σήμερον· καὶ ἄφες ἡμῖν τὰ ὀφειλήματα ἡμῶν, ὡς καὶ ἡμεῖς ἀφίεμεν τοῖς ὀφειλέταις ἡμῶν· καὶ μὴ εἰσενέγκῃς ἡμᾶς εἰς πειρασμόν, ἀλλὰ ῥῦσαι ἡμᾶς ἀπὸ τοῦ πονηροῦ. Ἀμήν.",
+    source: "Texto grego tradicional, conferido com material litúrgico da Santa Sé",
+    sourceUrl: "https://www.vatican.va/news_services/liturgy/libretti/2021/20211202-06-messale-cipro-grecia.pdf",
+  },
+]
+
 export const liturgicalSeasons = [
   { name: "Advento", color: "Violeta", meaning: "Espera, esperança e preparação para o Natal." },
   { name: "Natal", color: "Branco", meaning: "Celebração da Encarnação e manifestação de Cristo." },
