@@ -1,28 +1,29 @@
 import { motion } from "framer-motion"
 import { Github, Instagram, Youtube, Mail } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 import { contactLinks } from "../data/team"
 
 const footerLinks = {
-  Projetos: [
-    { label: "BHADOTT Agro", href: "#projetos" },
-    { label: "BHADOTT Video", href: "#projetos" },
-    { label: "BHADOTT Games", href: "#projetos" },
-    { label: "BHADOTT Tools", href: "#projetos" },
-    { label: "BHADOTT Academy", href: "#projetos" },
+  Portal: [
+    { label: "Jogos", href: "/portal/games" },
+    { label: "Inteligência Artificial", href: "/portal/ia" },
+    { label: "Música", href: "/portal/musica" },
+    { label: "Área Católica", href: "/portal/catolico" },
+    { label: "Academy", href: "/portal/academy" },
   ],
-  Serviços: [
-    { label: "Websites e Landing Pages", href: "#servicos" },
-    { label: "Sistemas SaaS", href: "#servicos" },
-    { label: "Aplicativos mobile", href: "#servicos" },
-    { label: "Automação com IA", href: "#servicos" },
-    { label: "Games e 3D", href: "#servicos" },
+  Conteúdo: [
+    { label: "Todos os projetos", href: "/projetos" },
+    { label: "BHADOTT Agro", href: "/agro" },
+    { label: "Blog", href: "/blog" },
+    { label: "Ferramentas", href: "/portal/ferramentas" },
+    { label: "Explorar o portal", href: "/portal" },
   ],
   Suporte: [
-    { label: "Central de suporte", href: "#suporte" },
-    { label: "Perguntas frequentes", href: "#suporte" },
-    { label: "WhatsApp", href: "#suporte" },
-    { label: "Enviar e-mail", href: "#suporte" },
-    { label: "Instagram", href: "#suporte" },
+    { label: "Central de suporte", href: "/suporte" },
+    { label: "Perguntas frequentes", href: "/suporte" },
+    { label: "Contato", href: "/contato" },
+    { label: "Sobre o estúdio", href: "/sobre" },
+    { label: "GitHub", href: "https://github.com/jorgealam" },
   ],
 }
 
@@ -55,10 +56,16 @@ function BhadottMark() {
 }
 
 export default function Footer() {
+  const navigate = useNavigate()
+
   const handleScroll = (e, href) => {
-    e.preventDefault()
     if (href.startsWith("#")) {
+      e.preventDefault()
       document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })
+    } else if (href.startsWith("/")) {
+      e.preventDefault()
+      navigate(href)
+      window.scrollTo(0, 0)
     }
   }
 

@@ -10,6 +10,7 @@ import Stats            from "../components/Stats"
 import About            from "../components/About"
 import Technologies     from "../components/Technologies"
 import Projects         from "../components/Projects"
+import PortalPreview    from "../components/PortalPreview"
 import Roadmap          from "../components/Roadmap"
 import ProgressGallery  from "../components/ProgressGallery"
 import Process          from "../components/Process"
@@ -60,6 +61,10 @@ export default function Home() {
         {/* ── Projetos em Destaque ── */}
         <Projects />
         <GlowDivider color="mixed" />
+
+        {/* ── Portal BHADOTT ── */}
+        <PortalPreview />
+        <GlowDivider color="blue" />
 
         {/* ── Roadmap ── */}
         <Roadmap />
