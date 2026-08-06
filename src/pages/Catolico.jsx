@@ -449,21 +449,22 @@ function CatechismView() {
 export default function Catolico() {
   const [activeTab, setActiveTab] = useState(() => new URLSearchParams(window.location.hash.split("?")[1] || "").get("secao") || "inicio")
   return (
-    <PageLayout backLabel="Voltar para o Portal" backTo="/portal">
-      <PageHero badge="Fé · Leitura · Oração" title="Área" titleGrad="Católica" subtitle="Um espaço sereno para rezar, estudar e descobrir a riqueza da tradição cristã.">
-        <div className="mt-8 inline-flex items-center gap-2 text-xs text-amber-200/70"><BookHeart size={14} aria-hidden="true" /> Conteúdo gratuito, introdutório e cuidadosamente organizado</div>
+    <PageLayout backLabel="Voltar para o Portal" backTo="/portal" theme="catholic">
+      <div className="catholic-theme">
+      <PageHero badge="Fé · Leitura · Oração" title="Área" titleGrad="Católica" subtitle="Um espaço sereno para rezar, estudar e descobrir a riqueza da tradição cristã." theme="catholic">
+        <div className="mt-8 inline-flex items-center gap-2 text-xs text-[#8a6924]"><BookHeart size={14} aria-hidden="true" /> Conteúdo gratuito, introdutório e cuidadosamente organizado</div>
       </PageHero>
       <GlowDivider color="violet" />
-      <div className="sticky top-16 lg:top-20 z-30 border-b border-white/6 bg-[#020617]/95 backdrop-blur-xl">
+      <div className="sticky top-16 lg:top-20 z-30 border-b border-[#ded3e4] bg-[#fffdf8]/95 backdrop-blur-xl">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex gap-2 overflow-x-auto" aria-label="Seções da Área Católica">
           {tabs.map(({ id, label, icon: Icon }) => (
-            <button key={id} onClick={() => setActiveTab(id)} className={`flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl border text-xs font-bold transition-colors focus-ring ${activeTab === id ? "text-amber-200 bg-amber-500/10 border-amber-300/20" : "text-slate-500 border-white/6 hover:text-slate-300"}`}>
+            <button key={id} onClick={() => setActiveTab(id)} className={`flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl border text-xs font-bold transition-colors focus-ring ${activeTab === id ? "text-[#6f4e09] bg-[#f5ead0] border-[#caa64e]" : "text-[#756b78] bg-white border-[#ded3e4] hover:text-[#5b159d]"}`}>
               <Icon size={14} aria-hidden="true" /> {label}
             </button>
           ))}
         </nav>
       </div>
-      <section className="py-14 sm:py-20 bg-[#020617]">
+      <section className="py-14 sm:py-20 bg-[#fbf8f2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {activeTab === "inicio" && <StartView setActiveTab={setActiveTab} />}
           {activeTab === "evangelho" && <DailyLiturgyView />}
@@ -479,6 +480,7 @@ export default function Catolico() {
           {activeTab === "catecismo" && <CatechismView />}
         </div>
       </section>
+      </div>
     </PageLayout>
   )
 }

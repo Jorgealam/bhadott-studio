@@ -12,6 +12,67 @@ html {
   max-width: 100vw;
 }
 
+/* Área Católica — leitura clara, serena e independente do tema geral */
+.catholic-layout > div:nth-child(2) {
+  background: #fffdf8;
+}
+
+.catholic-layout > div:nth-child(2) button {
+  color: #756b78;
+}
+
+.catholic-theme {
+  color: #2c2030;
+  background: #fbf8f2;
+}
+
+.catholic-theme [class*="text-white"],
+.catholic-theme [class*="text-slate-200"],
+.catholic-theme [class*="text-slate-300"] {
+  color: #302534 !important;
+}
+
+.catholic-theme [class*="text-slate-400"],
+.catholic-theme [class*="text-slate-500"],
+.catholic-theme [class*="text-slate-600"],
+.catholic-theme [class*="text-slate-700"] {
+  color: #756b78 !important;
+}
+
+.catholic-theme [class*="text-amber-200"],
+.catholic-theme [class*="text-amber-300"] {
+  color: #866317 !important;
+}
+
+.catholic-theme article,
+.catholic-theme aside,
+.catholic-theme [class*="bg-white/"],
+.catholic-theme [class*="bg-[#020617]"] {
+  background-color: #ffffff !important;
+}
+
+.catholic-theme article,
+.catholic-theme aside,
+.catholic-theme [class*="border-white/"] {
+  border-color: #e5dce9 !important;
+}
+
+.catholic-theme article[class*="bg-gradient"],
+.catholic-theme [class*="from-[#0d1424]"],
+.catholic-theme [class*="from-amber-100"] {
+  background-image: linear-gradient(145deg, #ffffff, #faf5fc) !important;
+}
+
+.catholic-theme input {
+  background: #ffffff !important;
+  color: #2c2030 !important;
+  border-color: #ded3e4 !important;
+}
+
+.catholic-theme .focus-ring {
+  --tw-ring-offset-color: #fbf8f2;
+}
+
 body {
   background-color: #020617;
   color: #f8fafc;

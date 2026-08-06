@@ -47,13 +47,14 @@ export function BackButton({ label = "Voltar", to = "/" }) {
 }
 
 // Hero de página interna — padrão para todas as páginas
-export function PageHero({ badge, title, titleGrad, subtitle, children }) {
+export function PageHero({ badge, title, titleGrad, subtitle, children, theme = "dark" }) {
+  const isCatholic = theme === "catholic"
   return (
-    <section className="relative pt-32 pb-16 sm:pt-40 sm:pb-20 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: "#020617" }} aria-hidden="true" />
+    <section className={`relative pt-32 pb-16 sm:pt-40 sm:pb-20 overflow-hidden ${isCatholic ? "catholic-hero" : ""}`}>
+      <div className="absolute inset-0" style={{ background: isCatholic ? "linear-gradient(145deg, #fffdf8, #f5edf8 58%, #f8f1df)" : "#020617" }} aria-hidden="true" />
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full blur-[100px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 70%)" }}
+        style={{ background: isCatholic ? "radial-gradient(ellipse, rgba(91,21,157,0.10) 0%, transparent 70%)" : "radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
       <div
@@ -89,12 +90,12 @@ export function PageHero({ badge, title, titleGrad, subtitle, children }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.06, duration: 0.6 }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight"
+          className={`text-4xl sm:text-5xl lg:text-6xl font-black mb-4 leading-tight ${isCatholic ? "text-[#2c2030]" : "text-white"}`}
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           {title}{" "}
           {titleGrad && (
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
+            <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isCatholic ? "from-[#8a6924] to-[#5b159d]" : "from-blue-400 to-violet-400"}`}>
               {titleGrad}
             </span>
           )}
@@ -105,7 +106,7 @@ export function PageHero({ badge, title, titleGrad, subtitle, children }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.6 }}
-            className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
+            className={`${isCatholic ? "text-[#756b78]" : "text-slate-400"} text-base sm:text-lg max-w-2xl mx-auto leading-relaxed`}
           >
             {subtitle}
           </motion.p>
@@ -118,7 +119,7 @@ export function PageHero({ badge, title, titleGrad, subtitle, children }) {
 }
 
 // Layout principal
-export default function PageLayout({ children, showBack = true, backLabel = "Voltar para Home", backTo = "/" }) {
+export default function PageLayout({ children, showBack = true, backLabel = "Voltar para Home", backTo = "/", theme = "dark" }) {
   const { pathname } = useLocation()
 
   // Scroll to top on route change
@@ -127,7 +128,7 @@ export default function PageLayout({ children, showBack = true, backLabel = "Vol
   }, [pathname])
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: "#020617" }}>
+    <div className={`min-h-screen overflow-x-hidden ${theme === "catholic" ? "catholic-layout" : ""}`} style={{ background: theme === "catholic" ? "#fbf8f2" : "#020617" }}>
       <Header />
 
       {showBack && (
