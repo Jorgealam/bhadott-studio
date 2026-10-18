@@ -21,11 +21,24 @@ Evoluir o site institucional existente para um portal modular sem descartar a id
 | Jogos | `/portal/games` | Fundação pronta |
 | Inteligência Artificial | `/portal/ia` | Fundação pronta |
 | Música | `/portal/musica` | Fundação pronta |
-| Área Católica | `/portal/catolico` | Fundação pronta |
 | Academy | `/portal/academy` | Fundação pronta |
 | Blog | `/blog` | Fundação editorial pronta |
 | Ferramentas | `/ferramentas` | Duas ferramentas disponíveis |
 | Agro | `/agro` | Módulo existente preservado |
+
+## Área Católica (separada)
+
+Desde 18/10/2026 a antiga Área Católica é um site independente, em projeto e repositório próprios:
+`D:\TRABALHO\PROJETOS\04_AREA_CATOLICA\Sites_e_Portais\Portal Catolico - React`.
+
+O portal não contém mais páginas, dados nem estilos católicos. Resta somente `src/pages/CatolicoMudou.jsx`
+na rota `/catolico`, uma ponte para favoritos antigos (`#/catolico?secao=...`):
+
+- com `VITE_PORTAL_CATOLICO_URL` definido no build, redireciona para `<url>#/?secao=...`, preservando a seção e a data;
+- sem a variável, mostra apenas o aviso de mudança, sem redirecionar.
+
+Um redirect HTTP não resolve essa rota, porque o fragmento `#/catolico` nunca chega ao servidor.
+Detalhes e pendências: [SEPARACAO_AREA_CATOLICA.md](SEPARACAO_AREA_CATOLICA.md).
 
 ## Organização implementada
 

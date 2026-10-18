@@ -1,5 +1,4 @@
 import {
-  BookMarked,
   Bot,
   Boxes,
   Calculator,
@@ -7,8 +6,6 @@ import {
   Download,
   Gamepad2,
   GraduationCap,
-  HeartHandshake,
-  Library,
   MessageSquareText,
   Music,
   Newspaper,
@@ -62,19 +59,6 @@ export const portalContent = {
       { icon: Download, title: "Downloads", description: "Materiais disponibilizados com licença e condições de uso claras." },
     ],
     next: ["Organizar catálogo de trilhas", "Definir identidade da área musical", "Preparar primeiro lançamento"],
-  },
-  catolico: {
-    eyebrow: "Fé e conhecimento",
-    intro: "Uma área construída com respeito, clareza e fontes responsáveis para apoiar estudo, oração e vida cristã.",
-    sections: [
-      { icon: BookMarked, title: "Liturgia", description: "Leituras e referências organizadas para acompanhar o calendário litúrgico." },
-      { icon: HeartHandshake, title: "Orações", description: "Coleção acessível por intenção, momento e tradição." },
-      { icon: Sparkles, title: "Santo do dia", description: "Biografias curtas com contexto histórico e espiritual." },
-      { icon: ScrollText, title: "Estudos", description: "Textos formativos com indicação clara de autoria e referências." },
-      { icon: GraduationCap, title: "Catecismo", description: "Índice de estudo e apoio para localizar temas com facilidade." },
-      { icon: Library, title: "Biblioteca", description: "Documentos, livros em domínio público e fontes oficiais selecionadas." },
-    ],
-    next: ["Definir política de fontes e revisão", "Criar calendário editorial", "Preparar estrutura da biblioteca"],
   },
   academy: {
     eyebrow: "Aprendizado aplicado",

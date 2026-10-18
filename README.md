@@ -40,6 +40,13 @@ O Worker e sua configuração ficam em `workers/agro-api/`. A chave administrati
 
 A arquitetura, as áreas disponíveis e o processo para adicionar novos módulos estão documentados em [docs/PORTAL_ARCHITECTURE.md](docs/PORTAL_ARCHITECTURE.md).
 
+## Área Católica
+
+A Área Católica foi extraída para um site independente (`D:\TRABALHO\PROJETOS\04_AREA_CATOLICA\Sites_e_Portais\Portal Catolico - React`).
+Este portal mantém apenas uma ponte na rota `#/catolico`, controlada por `VITE_PORTAL_CATOLICO_URL`
+(variável de repositório em **Settings → Secrets and variables → Actions → Variables**).
+Veja [docs/SEPARACAO_AREA_CATOLICA.md](docs/SEPARACAO_AREA_CATOLICA.md) antes de publicar esta mudança.
+
 ## Publicação
 
 Pushes para `main` acionam o workflow do GitHub Pages. Mudanças estruturais devem ser desenvolvidas e revisadas em branch separada antes da integração.

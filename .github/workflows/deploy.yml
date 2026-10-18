@@ -37,6 +37,7 @@ jobs:
         run: npm run build
         env:
           VITE_AGRO_API_URL: ${{ secrets.VITE_AGRO_API_URL }}
+          VITE_PORTAL_CATOLICO_URL: ${{ vars.VITE_PORTAL_CATOLICO_URL }}
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

@@ -20,7 +20,7 @@ const AgroStudio = lazy(() => import("./pages/AgroStudio"))
 const Portal = lazy(() => import("./pages/Portal"))
 const PortalArea = lazy(() => import("./pages/PortalArea"))
 const Ferramentas = lazy(() => import("./pages/Ferramentas"))
-const Catolico = lazy(() => import("./pages/Catolico"))
+const CatolicoMudou = lazy(() => import("./pages/CatolicoMudou"))
 const PlaceholderPage = lazy(() => import("./pages/PlaceholderPage"))
 
 export default function App() {
@@ -36,7 +36,8 @@ export default function App() {
         <Route path="/portal" element={<Portal />} />
         <Route path="/portal/:areaId" element={<PortalArea />} />
         <Route path="/ferramentas" element={<Ferramentas />} />
-        <Route path="/catolico" element={<Catolico />} />
+        {/* Antiga Área Católica — agora site independente; apenas ponte para favoritos */}
+        <Route path="/catolico" element={<CatolicoMudou />} />
 
         {/* ── Sobre ── */}
         <Route path="/sobre" element={<Sobre />} />

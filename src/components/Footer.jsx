@@ -8,7 +8,6 @@ const footerLinks = {
     { label: "Jogos", href: "/portal/games" },
     { label: "Inteligência Artificial", href: "/portal/ia" },
     { label: "Música", href: "/portal/musica" },
-    { label: "Área Católica", href: "/catolico" },
     { label: "Academy", href: "/portal/academy" },
   ],
   Conteúdo: [
