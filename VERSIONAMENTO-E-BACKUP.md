@@ -1,7 +1,10 @@
-# Versionamento e backup - BHADOTT Studio - Portal Institucional
+# Versionamento e restauracao - BHADOTT Studio - Portal Institucional
 
-Repositorio separado do projeto na conta Jorgealam.
+Codigo, cenas, documentacao e recursos pequenos ficam no repositorio individual deste projeto. O historico existente foi preservado.
 
-Caches, dependencias instaladas, builds, credenciais e dados locais nao fazem parte deste commit. Permanecem no computador; este commit nao confirma backup desses arquivos.
+Videos nao fazem parte dos envios ao GitHub ou ao Google Drive. Credenciais, configuracoes pessoais, bancos locais, caches, dependencias instaladas, instaladores e builds permanecem fora deste backup de codigo. Reinstale dependencias a partir dos manifests e arquivos de lock do projeto.
 
-Videos nao sao enviados ao GitHub nem ao Google Drive, conforme orientacao do proprietario.
+
+## Biblioteca compartilhada
+
+A [pasta privada de recursos](https://drive.google.com/drive/u/0/folders/1LvhwwM_xltV-n44XXHFCxjyGvopc9s1l) tambem recebe a biblioteca geral de modelos e texturas, recursos Unreal e seus manifestos. Consulte o relatorio geral de backup para confirmar quais uploads terminaram. Um arquivo preparado localmente nao confirma que seu upload terminou. Preserve os documentos de licenca e mantenha os recursos de terceiros privados.
